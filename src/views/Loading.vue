@@ -22,7 +22,12 @@
           {"src": "/static/imgs/投影@2x.png", "id": "2"},
           {"src": "/static/imgs/方向线 @2x.png", "id": "3"},
           {"src": "/static/imgs/球@2x.png", "id": "4"},
-          {"src": "/static/imgs/进度@2x.png", "id": "5"}
+          {"src": "/static/imgs/进度@2x.png", "id": "5"},
+          {'src':'/static/imgs/line1@2x.png','id':6},
+          {'src':'/static/imgs/line2@2x.png','id':7},
+          {'src':'/static/imgs/底色@2x.png','id':8},
+          {'src':'/static/imgs/开启测试之旅@2x.png','id':9},
+          {'src':'/static/imgs/打开声音@2x.png','id':10},
         ],
         progress:[],
         bar_width:0

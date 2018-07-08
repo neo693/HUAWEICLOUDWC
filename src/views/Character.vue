@@ -1,13 +1,13 @@
 <template>
     <div class="choose-character">
-       <div class="your-name" :style="{background:`url(${bg_url})`}" @click="showInput">
+       <div class="your-name" :style="{background:`url(${bg_url}) no-repeat`}" @click="showInput">
          <input type="text" v-model="params.user_name" class="txt" v-if="show_input" @blur="lostFocus" autofocus="autofocus" >
        </div>
       <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
       <img  alt="player" class="player-attack" onclick="return false;" v-show="!is_attack">
       <div class="arrows">
-        <img src="/static/imgs/character/l-arrow@2x.png" alt="左箭头" class="l-arrow" @click="chooseAttack">
-        <img src="/static/imgs/character/r-arrow@2x.png" alt="右箭头" class="r-arrow" @click="chooseDefence">
+        <img src="/static/imgs/character/l-arrow@2x.png" alt="左箭头" class="l-arrow" @click="Arrow">
+        <img src="/static/imgs/character/r-arrow@2x.png" alt="右箭头" class="r-arrow" @click="Arrow">
       </div>
       <div class="stage-wrapper">
         <img src="/static/imgs/character/stage@2x.png" alt="stage" class="stage" onclick="return false;">
@@ -59,6 +59,13 @@
           this.params.type=2
           this.is_attack=false
         },
+        Arrow(){
+          if(this.is_attack){
+            this.chooseDefence()
+          }else{
+            this.chooseAttack()
+          }
+        },
         toNext(){
           /*进入下一页*/
           if(this.params.type==1 && this.params.user_name!==''){
@@ -84,14 +91,17 @@
         margin: auto;
         left:0;
         right: 0;
+        padding-top:14px;
+        padding-left:22px;
+        box-sizing: border-box;
         .txt{
-          width: 145px;
-          height: 34px;
-          margin-left:20px;
-          margin-top:12px;
+          width: 140px;
+          height: 30px;
           padding: 0 12px;
           box-sizing: border-box;
-
+          border:none;
+          text-align: center;
+          font-size: 18px;
         }
         input:focus { outline: none;background: #fff;border:none;}
       }
