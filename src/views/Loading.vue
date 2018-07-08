@@ -39,11 +39,12 @@
         this.percent=100
         this.bar_width=86.6
         /*加载结束后跳转下一页*/
+        this.$router.push({name:'Enter'})
       },
       handleFileLoad(e){
         this.progress.push(e.item.id)
         this.percent=(this.progress.length*100/this.resources.length).toFixed(0)
-        this.bar_width+=this.percent*0.866
+        this.bar_width=86.6/this.resources.length*this.progress.length
       },
     },
     created(){
@@ -53,7 +54,7 @@
 </script>
 <style lang="scss" scoped>
     .loading{
-      background: url('/static/imgs/方向线%20@2x.png') no-repeat  center 0;
+      background: url('/static/imgs/line1@2x.png') no-repeat  center 0;
       position: relative;
       width: 100%;
       height: 100%;
