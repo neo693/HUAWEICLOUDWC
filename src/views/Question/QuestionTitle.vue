@@ -17,6 +17,8 @@
 
 <style lang="scss" scoped>
   img {
+    width: 303px;
+    height: 104px;
     position: fixed;
     top: 293px;
     left: 50%;

@@ -33,16 +33,22 @@
 
 <style lang="scss" scoped>
   img {
-    position: fixed;
+    position: absolute;
     &:first-child {
+      width: 200px;
+      height: 160px;
       bottom: 62px;
       left: 3px;
     }
     &:nth-child(2) {
+      width: 200px;
+      height: 167px;
       bottom: 57px;
       right: 0;
     }
     &:last-child {
+      width: 371px;
+      height: 117px;
       left: 4px;
       bottom: 6px;
     }

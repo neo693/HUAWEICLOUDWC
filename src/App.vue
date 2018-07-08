@@ -11,17 +11,20 @@ export default {
 </script>
 
 <style>
-  @font-face
-  {
+  @import "./assets/css/normalize.css";
+  @font-face {
     font-family: myFont;
     src: url('/static/FZLTHJW.TTF')
   }
-#app {
-@import "./assets/css/normalize.css";
-  font-family: 'myFont';
-  width: 100vw;
-  height: 100vh;
-  background: url('/static/imgs/底色@2x.png') no-repeat fixed center;
-  background-size:100% 100%;
-}
+
+  #app {
+    font-family: 'myFont';
+    width: 375px;
+    height: 100vh;
+    margin: 0 auto;
+  }
+  body {
+    background: url('/static/imgs/底色@2x.png') no-repeat fixed center;
+    background-size: 100% 100%;
+  }
 </style>

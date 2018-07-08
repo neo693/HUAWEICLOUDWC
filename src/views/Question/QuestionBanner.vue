@@ -27,7 +27,7 @@
 <style lang="scss" scoped>
   img {
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: -58px;
   }
 </style>
