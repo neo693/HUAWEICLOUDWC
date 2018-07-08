@@ -1,7 +1,10 @@
 <template>
     <div class="choose-character">
-       <div class="your-name" :style="{background:`url(${bg_url}) no-repeat`}" @click="showInput">
-         <input type="text" v-model="params.user_name" class="txt" v-if="show_input" @blur="lostFocus" autofocus="autofocus" >
+       <div class="your-name" >
+         <div class="txt-wrapper" v-if="show_input">
+           <input type="text" v-model="params.user_name" class="txt"  @blur="lostFocus" autofocus="autofocus">
+         </div>
+         <img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else="!show_input">
        </div>
       <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
       <img  alt="player" class="player-attack" onclick="return false;" v-show="!is_attack">
@@ -39,15 +42,10 @@
       },
       methods:{
         showInput(){
-            this.bg_url='/static/imgs/输入姓名@2x_1.png'
             this.show_input=true
         },
         lostFocus(){
-          console.log('ccc')
-          if(this.params.user_name===''){
-            this.show_input=false
-            this.bg_url='/static/imgs/输入姓名@2x.png'
-          }
+          this.show_input=false
         },
         chooseAttack(){
           this.btn_url='/static/imgs/character/type-chose@2x.png'
@@ -84,26 +82,40 @@
       height: 100%;
       background: url('/static/imgs/character/dir-line@2x.png') no-repeat center 74px;
       .your-name{
-        width: 182px;
+        width: 375px;
         height: 59px;
         position: absolute;
         top:16px;
         margin: auto;
         left:0;
         right: 0;
-        padding-top:14px;
-        padding-left:22px;
-        box-sizing: border-box;
-        .txt{
-          width: 140px;
-          height: 30px;
-          padding: 0 12px;
-          box-sizing: border-box;
-          border:none;
-          text-align: center;
-          font-size: 18px;
+        text-align: center;
+        .no-name{
+          width: 182px;
+          height: 59px;
+          display: inline-block;
         }
-        input:focus { outline: none;background: #fff;border:none;}
+        .txt-wrapper{
+          background: url('/static/imgs/输入姓名@2x_1.png') no-repeat center;
+          background-size: 182px 59px;
+          width: 182px;
+          height: 59px;
+          display: inline-block;
+          padding-top: 14px;
+          text-align: center;
+          box-sizing: border-box;
+          .txt{
+            width: 140px;
+            height: 30px;
+            padding: 0 12px;
+            box-sizing: border-box;
+            border:none;
+            text-align: center;
+            font-size: 18px;
+          }
+          input:focus { outline: none;background: #fff;border:none;}
+        }
+
       }
       .player-attack{
         width: 297px;

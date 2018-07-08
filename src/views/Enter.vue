@@ -29,7 +29,6 @@
     .enter{
       width:100%;
       height: 100%;
-      position: relative;
       background: url('/static/imgs/line2@2x.png') no-repeat center 154px;
       .title{
         display: block;
@@ -38,6 +37,8 @@
         margin: auto;
         left:0;
         right: 0;
+        width: 245px;
+        height: 160px;
       }
       .man1{
         position: absolute;
@@ -45,7 +46,7 @@
         top:182px;
         width: 360px;
         height: 340px;
-        left:18px;
+        left:0;
         right: 0;
         margin: auto;
       }
