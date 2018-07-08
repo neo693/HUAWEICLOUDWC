@@ -1,6 +1,6 @@
 <template>
     <div class="choose-character">
-       <div class="your-name" :style="{background:`url(${bg_url})`}" @click="showInput">
+       <div class="your-name" :style="{backgroundImage:`url(${bg_url})`}" @click="showInput">
          <input type="text" v-model="params.user_name" class="txt" v-if="show_input" @blur="lostFocus" autofocus="autofocus" >
        </div>
       <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
@@ -84,14 +84,17 @@
         margin: auto;
         left:0;
         right: 0;
+        background-size: contain;
         .txt{
-          width: 145px;
-          height: 34px;
-          margin-left:20px;
-          margin-top:12px;
+          width: 140px;
+          height: 30px;
+          margin-left:22px;
+          margin-top:14px;
           padding: 0 12px;
           box-sizing: border-box;
-
+          border: none;
+          font-size: 20px;
+          line-height: 30px;
         }
         input:focus { outline: none;background: #fff;border:none;}
       }
