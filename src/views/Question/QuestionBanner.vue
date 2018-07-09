@@ -38,5 +38,6 @@
     width: 100%;
     position: absolute;
     top: -58px;
+    z-index: 1;
   }
 </style>

@@ -35,11 +35,13 @@
           if (+this.$route.name.slice(-1) < 3) {
             this.$router.push({
               path: this.$route.path.slice(0, -1) + ((+this.$route.path.slice(-1))+1),
-              query: JSON.parse(JSON.stringify(this.$route.query))
+              query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
+                [this.$route.name.toLowerCase()]: this.selected
+              })
             })
             this.selected = false
           } else {
-            alert('该进入结果页了')
+            alert('该进入结果页了, 记得带上上面的question3参数')
           }
         })
       }
@@ -59,20 +61,20 @@
           id: `F${i}B`
         })
         sounds.push({
-          src: `G${i}C.mp3`,
+          src: `F${i}C.mp3`,
           id: `F${i}C`
         })
         sounds.push({
           src: `G${i}A.mp3`,
-          id: `F${i}A`
+          id: `G${i}A`
         })
         sounds.push({
           src: `G${i}B.mp3`,
-          id: `F${i}B`
+          id: `G${i}B`
         })
         sounds.push({
           src: `G${i}C.mp3`,
-          id: `F${i}C`
+          id: `G${i}C`
         })
       })
       createjs.Sound.registerSounds(sounds, assetPath)
