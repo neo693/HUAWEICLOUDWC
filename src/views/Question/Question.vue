@@ -17,7 +17,9 @@
     components: { QuestionBanner, QuestionTitle, QuestionFooter },
     data() {
       return {
-        selected: false
+        selected: false,
+        // 开场动画
+        begin: false,
       }
     },
     methods: {
@@ -55,6 +57,7 @@
         createjs.Sound.registerSounds(sounds, assetPath)
       },
       select(answer) {
+        if (!this.begin) return
         this.selected = answer
 
         // 播放声音
@@ -81,14 +84,30 @@
       },
       // 防守类的球轨迹
       FSAnimate() {
-        anime({
-          el: '.question-ball',
-
-        })
+        var timeline = anime.timeline()
+        timeline
+          .add({
+            targets: '.question-ball',
+            top: -100,
+            left: 150,
+            easing: [0.58, 0.005, 1.00, 0.48],
+            duration: 600
+          })
+          .finished
+          .then(() => {
+            console.log('动画完了')
+            this.begin = true
+          })
       }
     },
     created() {
       this.registerSound()
+    },
+    mounted() {
+      // 防守类球轨迹
+      setTimeout(() => {
+        this.FSAnimate()
+      }, 500)
     }
   }
 </script>
@@ -99,5 +118,10 @@
     height: 100%;
     background: url('/static/imgs/line1@2x.png') no-repeat center -58px;
     position: relative;
+  }
+  .question-ball {
+    position: fixed;
+    top: 700px;
+    left: 200px;
   }
 </style>
