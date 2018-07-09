@@ -9,7 +9,7 @@
     name: "QuestionTitle",
     computed: {
       imgSrc() {
-        return `/static/imgs/Question/${this.$route.name}.png`
+        return `/static/imgs/Question${this.$route.query.type}/${this.$route.name}.png`
       }
     }
   }

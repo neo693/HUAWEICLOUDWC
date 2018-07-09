@@ -1,9 +1,10 @@
 <template>
   <div>
-    <img :src="personImgSrc" alt="">
-    <!--比较特殊的一张图-->
-    <img src="/static/imgs/QuestionBanner/3-B3.png" alt="" v-if="$route.name=='Question3'&&selected=='B'">
-    <img :src="ballImgSrc" alt="">
+    <!--不管三七二十一，上来就是四张图，够了-->
+    <img :src="ImgSrc1" alt="">
+    <img :src="ImgSrc2" alt="">
+    <img :src="ImgSrc3" alt="">
+    <img :src="ImgSrc4" alt="">
   </div>
 </template>
 
@@ -12,13 +13,21 @@
       name: "QuestionBanner",
       props: ['selected'],
       computed: {
-        personImgSrc() {
+        ImgSrc1() {
           if (!this.selected) return ''
-          return `/static/imgs/QuestionBanner/${this.$route.name.slice(-1)}-${this.selected}.png`
+          return `/static/imgs/QuestionBanner${this.$route.query.type}/${this.$route.name.slice(-1)}-${this.selected}.png`
         },
-        ballImgSrc() {
+        ImgSrc2() {
           if (!this.selected) return ''
-          return `/static/imgs/QuestionBanner/${this.$route.name.slice(-1)}-${this.selected}2.png`
+          return `/static/imgs/QuestionBanner${this.$route.query.type}/${this.$route.name.slice(-1)}-${this.selected}2.png`
+        },
+        ImgSrc3() {
+          if (!this.selected) return ''
+          return `/static/imgs/QuestionBanner${this.$route.query.type}/${this.$route.name.slice(-1)}-${this.selected}3.png`
+        },
+        ImgSrc4() {
+          if (!this.selected) return ''
+          return `/static/imgs/QuestionBanner${this.$route.query.type}/${this.$route.name.slice(-1)}-${this.selected}4.png`
         }
       }
     }

@@ -1,9 +1,9 @@
 <template>
-    <div class="question-wrap">
-      <QuestionBanner :selected="selected"></QuestionBanner>
-      <QuestionTitle></QuestionTitle>
-      <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
-    </div>
+  <div class="question-wrap">
+    <QuestionBanner :selected="selected"></QuestionBanner>
+    <QuestionTitle></QuestionTitle>
+    <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
+  </div>
 </template>
 
 <script>
@@ -22,19 +22,60 @@
     methods: {
       select(answer) {
         this.selected = answer
-        // 进入下一页
-        // 如果是问题1或者2就进入下一个问题
-        // 首先得播放动画再进入下一页
-        setTimeout(() => {
+
+        // 播放声音
+        let soundID = `${this.$route.query.type == 1 ? 'G' : 'F'}${this.$route.name.slice(-1)}${this.selected}`
+        createjs.Sound.play(soundID).on('complete', () => {
+          console.log('配音播放结束')
+
+          // 进入下一页
+          // 如果是问题1或者2就进入下一个问题
+          // 首先得播放动画再进入下一页
+
           if (+this.$route.name.slice(-1) < 3) {
-            this.$router.push(this.$route.fullPath.slice(0, -1) + ((+this.$route.fullPath.slice(-1))+1))
+            this.$router.push({
+              path: this.$route.path.slice(0, -1) + ((+this.$route.path.slice(-1))+1),
+              query: JSON.parse(JSON.stringify(this.$route.query))
+            })
             this.selected = false
           } else {
             alert('该进入结果页了')
           }
-        }, 3000)
-
+        })
       }
+    },
+    created() {
+      // 注册声音
+      createjs.Sound.alternateExtensions = ["mp3"];
+      let assetPath = '../../../static/audio/';
+      let sounds = [];
+      [1, 2, 3].forEach(i => {
+        sounds.push({
+          src: `F${i}A.mp3`,
+          id: `F${i}A`
+        })
+        sounds.push({
+          src: `F${i}B.mp3`,
+          id: `F${i}B`
+        })
+        sounds.push({
+          src: `G${i}C.mp3`,
+          id: `F${i}C`
+        })
+        sounds.push({
+          src: `G${i}A.mp3`,
+          id: `F${i}A`
+        })
+        sounds.push({
+          src: `G${i}B.mp3`,
+          id: `F${i}B`
+        })
+        sounds.push({
+          src: `G${i}C.mp3`,
+          id: `F${i}C`
+        })
+      })
+      createjs.Sound.registerSounds(sounds, assetPath)
     }
   }
 </script>
