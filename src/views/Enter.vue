@@ -29,9 +29,7 @@
         this.$router.push({name:'Character'})
       },
       animate(){
-       this.show_head_ball=true
-        this.show_gate=false
-        this.show_hit=false
+
 
         let ball2=anime({
           targets: '.ball1',
@@ -39,15 +37,15 @@
           translateY: [-100,0],
           duration: 2000,
           loop: false,
-          easing: 'easeInCubic'
+          easing: 'linear'
         })
         let man2=anime({
           targets: '.man2',
           translateX:[275,0],
-          translateY: [567,0],
+          translateY: [467,0],
           duration: 2000,
           loop: false,
-          easing: 'easeInCubic'
+          easing: 'linear'
         })
         man2.finished.then(()=>{
           setTimeout(()=>{
@@ -58,7 +56,7 @@
               translateX:[-375,0],
               duration: 2000,
               loop: false,
-              easing: 'easeInOutQuart'
+              easing: 'linear'
             })
             man3.finished.then(()=>{
               setTimeout(()=>{
@@ -66,11 +64,11 @@
                 this.show_hit = true
                 let man1=anime({
                   targets: '.hit',
-                  translateX:[475,0],
-                  translateY: [767,0],
+                  translateX:[275,0],
+                  translateY: [467,0],
                   duration: 2000,
                   loop: false,
-                  easing: 'easeInCubic'
+                  easing: 'linear'
                 })
                 let ball2=anime(
                   {
@@ -79,11 +77,14 @@
                     translateY: [50,0],
                     duration: 2000,
                     loop: false,
-                    easing: 'easeInCubic'
+                    easing: 'linear'
                   }
                 )
                 ball2.finished.then(()=>{
                   setTimeout(()=>{
+                    this.show_gate=false
+                    this.show_hit=false
+                    this.show_head_ball=true
                     this.animate()
                   },1000)
 
