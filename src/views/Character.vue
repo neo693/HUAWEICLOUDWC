@@ -7,7 +7,7 @@
          <img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else>
        </div>
       <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
-      <img  alt="player" class="player-attack" onclick="return false;" v-show="!is_attack">
+      <img  src="/static/imgs/群組1@2x_2.png" alt="player" class="player-affend animated fadeInUp" onclick="return false;" v-show="!is_attack">
       <div class="arrows">
         <img src="/static/imgs/character/l-arrow@2x.png" alt="左箭头" class="l-arrow" @click="Arrow">
         <img src="/static/imgs/character/r-arrow@2x.png" alt="右箭头" class="r-arrow" @click="Arrow">
@@ -36,7 +36,7 @@
             bg_url:'/static/imgs/输入姓名@2x.png',
             show_input:false,
             btn_url:'/static/imgs/character/type-chose@2x.png',
-            player_url:'/static/imgs/群組 1@2x_1.png',
+            player_url:'/static/imgs/群組1@2x_1.png',
             is_attack:true
           }
       },
@@ -48,7 +48,7 @@
           if(this.params.user_name===''){
                 this.show_input=false
           }
-          
+
         },
         chooseAttack(){
           this.btn_url='/static/imgs/character/type-chose@2x.png'
@@ -93,6 +93,7 @@
         left:0;
         right: 0;
         text-align: center;
+        z-index: 2;
         .no-name{
           width: 182px;
           height: 59px;
@@ -129,6 +130,13 @@
         top:89px;
         left:40px;
         right: 0;
+        z-index: 1;
+      }
+      .player-affend {
+        width: 375px;
+        height: 667px;
+        position: absolute;
+        top: -58px;
         z-index: 1;
       }
       .arrows{
@@ -177,6 +185,7 @@
         left:0;
         right: 0;
         top:462px;
+        z-index: 2;
         .btn-img{
           width: 255px;
           height: 68px;
@@ -205,6 +214,7 @@
         top:529px;
         left:0;
         right: 0;
+        z-index: 2;
       }
     }
 </style>
