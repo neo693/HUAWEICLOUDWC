@@ -7,7 +7,7 @@
          <img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else>
        </div>
       <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
-      <img  src="/static/imgs/character/defence-player.png" alt="player" class="player-defense animated zoomIn" onclick="return false;" v-show="!is_attack">
+      <img  src="/static/imgs/character/defence-player.png" alt="player" class="player-defense animated slideInUp" onclick="return false;" v-show="!is_attack">
       <div class="arrows">
         <img src="/static/imgs/character/l-arrow@2x.png" alt="左箭头" class="l-arrow" @click="Arrow">
         <img src="/static/imgs/character/r-arrow@2x.png" alt="右箭头" class="r-arrow" @click="Arrow">
@@ -36,7 +36,7 @@
             bg_url:'/static/imgs/输入姓名@2x.png',
             show_input:false,
             btn_url:'/static/imgs/character/type-chose@2x.png',
-            player_url:'/static/imgs/群組 1@2x_1.png',
+            player_url:'/static/imgs/群組1@2x_1.png',
             is_attack:true
           }
       },

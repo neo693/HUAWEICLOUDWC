@@ -1,7 +1,7 @@
 <template>
   <div class="enter">
     <img src="/static/imgs/标题@2x.png" alt="title" class="title">
-      <img src="/static/imgs/群組 1@2x.png" alt="man" class="man1 animated slideInLeft" >
+    <img src="/static/imgs/群組1@2x.png" alt="man" class="man1 animated slideInLeft" >
     <img src="/static/imgs/开启测试之旅@2x.png" alt="start" class="start animated fadeIn" @click="start" v-show="show_btn">
     <img src="/static/imgs/打开声音@2x.png" alt="music" class="music animated fadeIn" v-show="show_btn">
   </div>
