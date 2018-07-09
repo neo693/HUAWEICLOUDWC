@@ -10,7 +10,6 @@
     <img src="/static/imgs/enter/ball2.png" class="ball2" v-show="show_hit">
     <img src="/static/imgs/开启测试之旅@2x.png" alt="start" class="start animated fadeIn" @click="start" v-show="show_btn">
     <img :src="music_url" alt="music" class="music animated fadeIn" v-show="show_btn" @click="switchMusic">
-
   </div>
 </template>
 <script>
@@ -97,10 +96,12 @@
       switchMusic(){
          if(this.music_url=='/static/imgs/打开声音@2x.png'){
            this.music_url='/static/imgs/enter/框@2x.png'
+           document.getElementById('audio').pause()
          }else if(this.music_url=='/static/imgs/enter/框@2x.png'){
            this.music_url='/static/imgs/打开声音@2x.png'
+           document.getElementById('audio').play()
          }
-      }
+      },
     },
     mounted(){
       this.animate()
@@ -115,6 +116,8 @@
       width:100%;
       height: 100%;
       background: url('/static/imgs/line2@2x.png') no-repeat center 154px;
+      position: relative;
+      overflow: hidden;
       .title{
         display: block;
         position:absolute;
