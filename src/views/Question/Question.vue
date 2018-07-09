@@ -3,6 +3,7 @@
     <QuestionBanner :selected="selected"></QuestionBanner>
     <QuestionTitle></QuestionTitle>
     <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
+    <img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">
   </div>
 </template>
 
@@ -20,6 +21,39 @@
       }
     },
     methods: {
+      registerSound() {
+        // 注册声音
+        createjs.Sound.alternateExtensions = ["mp3"];
+        let assetPath = '../../../static/audio/';
+        let sounds = [];
+        [1, 2, 3].forEach(i => {
+          sounds.push({
+            src: `F${i}A.mp3`,
+            id: `F${i}A`
+          })
+          sounds.push({
+            src: `F${i}B.mp3`,
+            id: `F${i}B`
+          })
+          sounds.push({
+            src: `F${i}C.mp3`,
+            id: `F${i}C`
+          })
+          sounds.push({
+            src: `G${i}A.mp3`,
+            id: `G${i}A`
+          })
+          sounds.push({
+            src: `G${i}B.mp3`,
+            id: `G${i}B`
+          })
+          sounds.push({
+            src: `G${i}C.mp3`,
+            id: `G${i}C`
+          })
+        })
+        createjs.Sound.registerSounds(sounds, assetPath)
+      },
       select(answer) {
         this.selected = answer
 
@@ -44,40 +78,17 @@
             alert('该进入结果页了, 记得带上上面的question3参数')
           }
         })
+      },
+      // 防守类的球轨迹
+      FSAnimate() {
+        anime({
+          el: '.question-ball',
+
+        })
       }
     },
     created() {
-      // 注册声音
-      createjs.Sound.alternateExtensions = ["mp3"];
-      let assetPath = '../../../static/audio/';
-      let sounds = [];
-      [1, 2, 3].forEach(i => {
-        sounds.push({
-          src: `F${i}A.mp3`,
-          id: `F${i}A`
-        })
-        sounds.push({
-          src: `F${i}B.mp3`,
-          id: `F${i}B`
-        })
-        sounds.push({
-          src: `F${i}C.mp3`,
-          id: `F${i}C`
-        })
-        sounds.push({
-          src: `G${i}A.mp3`,
-          id: `G${i}A`
-        })
-        sounds.push({
-          src: `G${i}B.mp3`,
-          id: `G${i}B`
-        })
-        sounds.push({
-          src: `G${i}C.mp3`,
-          id: `G${i}C`
-        })
-      })
-      createjs.Sound.registerSounds(sounds, assetPath)
+      this.registerSound()
     }
   }
 </script>
