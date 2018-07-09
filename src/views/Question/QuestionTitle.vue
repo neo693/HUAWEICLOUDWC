@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated slideInRight">
     <img :src="imgSrc" alt="">
   </div>
 </template>
