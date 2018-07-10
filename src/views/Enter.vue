@@ -20,7 +20,10 @@
         show_head_ball:true,
         show_gate:false,
         show_hit:false,
-        music_url:'/static/imgs/打开声音@2x.png'
+        music_url:'/static/imgs/打开声音@2x.png',
+        time_dur:1000,
+        time_delay:300
+  
       }
     },
     methods:{
@@ -28,13 +31,12 @@
         this.$router.push({name:'Character'})
       },
       animate(){
-
-
+        let that=this
         let ball2=anime({
           targets: '.ball1',
           translateX:[-200,0],
           translateY: [-100,0],
-          duration: 2000,
+          duration: that.time_dur,
           loop: false,
           easing: 'linear'
         })
@@ -42,7 +44,7 @@
           targets: '.man2',
           translateX:[275,0],
           translateY: [467,0],
-          duration: 2000,
+          duration: that.time_dur,
           loop: false,
           easing: 'linear'
         })
@@ -53,7 +55,7 @@
             let man3=anime({
               targets: '.gate',
               translateX:[-375,0],
-              duration: 2000,
+              duration: that.time_dur,
               loop: false,
               easing: 'linear'
             })
@@ -65,7 +67,7 @@
                   targets: '.hit',
                   translateX:[275,0],
                   translateY: [467,0],
-                  duration: 2000,
+                  duration: that.time_dur,
                   loop: false,
                   easing: 'linear'
                 })
@@ -74,7 +76,7 @@
                     targets: '.ball2',
                     translateX:[475,0],
                     translateY: [50,0],
-                    duration: 2000,
+                    duration: that.time_dur,
                     loop: false,
                     easing: 'linear'
                   }
@@ -85,12 +87,12 @@
                     this.show_hit=false
                     this.show_head_ball=true
                     this.animate()
-                  },1000)
+                  },that.time_delay)
 
                 })
-              },1000)
+              },that.time_delay)
             })
-          },1000)
+          },that.time_delay)
         });
       },
       switchMusic(){

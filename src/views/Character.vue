@@ -20,6 +20,7 @@
          <div class="attack-txt" @click="chooseAttack"></div>
          <div class="defence-txt" @click="chooseDefence"></div>
        </div>
+       <img src="/static/imgs/toast.png" v-show="show_toast" class="toast">
       <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
     </div>
 </template>
@@ -37,7 +38,8 @@
             show_input:false,
             btn_url:'/static/imgs/character/type-chose@2x.png',
             player_url:'/static/imgs/群組1@2x_1.png',
-            is_attack:true
+            is_attack:true,
+            show_toast:false
           }
       },
       methods:{
@@ -73,6 +75,11 @@
             this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:1}})
           }else if(this.params.type==2 && this.params.user_name!==''){
             this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:2}})
+          }else{
+            this.show_toast=true
+            setTimeout(()=>{
+                  this.show_toast=false
+            },2000)
           }
         }
       }
@@ -217,6 +224,16 @@
         left:0;
         right: 0;
         z-index: 3;
+      }
+      .toast{
+        position:absolute;
+        top:460px;
+        width: 200px;
+        height: 75px;
+        margin: auto;
+        left:0;
+        right: 0;
+        z-index: 4;
       }
     }
 </style>
