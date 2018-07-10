@@ -14,12 +14,17 @@
   export default {
     data(){
       return {
-        player_url:''
+        player_url:'',
+        user_name:'',
+        player_name:''
       }
     },
     methods:{
       init(){
+        //根据答案判断是哪位球星
           this.player_url='/static/imgs/result/C罗@2x.png'
+          this.user_name='郭小丹'
+          this.player_name='c 罗'
       }
     },
     created(){
