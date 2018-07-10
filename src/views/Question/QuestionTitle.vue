@@ -1,5 +1,5 @@
 <template>
-  <div class="animated slideInRight">
+  <div class="title-wrap">
     <img :src="imgSrc" alt="">
   </div>
 </template>
@@ -7,9 +7,24 @@
 <script>
   export default {
     name: "QuestionTitle",
+    data() {
+      return {
+        animate: false
+      }
+    },
     computed: {
       imgSrc() {
         return `/static/imgs/Question${this.$route.query.type}/${this.$route.name}.png`
+      }
+    },
+    watch: {
+      '$route'() {
+        anime({
+          targets: '.title-wrap',
+          translateX: [600, 0],
+          duration: 800,
+          easing: 'linear'
+        })
       }
     }
   }
