@@ -35,7 +35,7 @@
     width: 303px;
     height: 104px;
     position: fixed;
-    top: 293px;
+    bottom: 212px;
     left: 50%;
     transform: translateX(-50%);
   }
