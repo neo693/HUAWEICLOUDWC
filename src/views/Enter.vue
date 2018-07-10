@@ -23,7 +23,7 @@
         music_url:'/static/imgs/打开声音@2x.png',
         time_dur:1000,
         time_delay:300
-  
+
       }
     },
     methods:{
@@ -143,7 +143,7 @@
       .start{
         position: absolute;
         display: block;
-        top:510px;
+        bottom:31px;
         margin: auto;
         left:0;
         right: 0;
@@ -153,7 +153,7 @@
       .music{
         position: absolute;
         display: block;
-        top:576px;
+        bottom:11px;
         margin: auto;
         left:0;
         right: 0;
