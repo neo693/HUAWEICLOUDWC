@@ -3,7 +3,7 @@
     <QuestionBanner :selected="selected"></QuestionBanner>
     <QuestionTitle></QuestionTitle>
     <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
-    <img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">
+    <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
   </div>
 </template>
 
@@ -78,7 +78,12 @@
             })
             this.selected = false
           } else {
-            alert('该进入结果页了, 记得带上上面的question3参数')
+            this.$router.push({
+              name: 'Result',
+              query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
+                [this.$route.name.toLowerCase()]: this.selected
+              })
+            })
           }
         })
       },
@@ -98,7 +103,8 @@
             console.log('动画完了')
             this.begin = true
           })
-      }
+      },
+
     },
     created() {
       this.registerSound()
