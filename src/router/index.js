@@ -4,6 +4,7 @@ import Loading from '@/views/Loading'
 import Character from '@/views/Character'
 import Enter from '@/views/Enter'
 import Question from '@/views/Question/Question'
+import Result from '../views/Result/Result'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/question3',
       name: 'Question3',
       component: Question
+    },
+    {
+      path:'/result',
+      name:'Result',
+      component:Result
     }
   ]
 })
