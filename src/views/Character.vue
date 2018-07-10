@@ -22,6 +22,9 @@
        </div>
        <img src="/static/imgs/toast.png" v-show="show_toast" class="toast">
       <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
+      <img src="/static/video/video1.gif" class="video-attack" v-show="show_defence_video">
+      <img src="/static/video/video2.gif" class="video-attack" v-show="show_attack_video">
+      <audio src="/static/bgm/music.mp3" ref="video_bgm" loop></audio>
     </div>
 </template>
 
@@ -39,7 +42,9 @@
             btn_url:'/static/imgs/character/type-chose@2x.png',
             player_url:'/static/imgs/群組1@2x_1.png',
             is_attack:true,
-            show_toast:false
+            show_toast:false,
+            show_attack_video:false,
+            show_defence_video:false
           }
       },
       methods:{
@@ -72,9 +77,21 @@
         toNext(){
           /*进入下一页*/
           if(this.params.type==1 && this.params.user_name!==''){
-            this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:1}})
+            document.getElementById('audio').pause()
+            this.$refs.video_bgm.play()
+            this.show_attack_video=true
+            setTimeout(()=>{
+              this.$refs.video_bgm.pause()
+              this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:1}})
+            },5099)
           }else if(this.params.type==2 && this.params.user_name!==''){
-            this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:2}})
+            document.getElementById('audio').pause()
+            this.$refs.video_bgm.play()
+            this.show_defence_video=true
+            setTimeout(()=>{
+              this.$refs.video_bgm.pause()
+              this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:2}})
+            },6000)
           }else{
             this.show_toast=true
             setTimeout(()=>{
@@ -244,6 +261,16 @@
         left:0;
         right: 0;
         z-index: 4;
+      }
+      .video-attack{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        left:0;
+        right: 0;
+        top:0;
+        z-index: 5;
       }
     }
 </style>
