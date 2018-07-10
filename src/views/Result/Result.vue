@@ -38,9 +38,9 @@
     methods:{
       init(){
         //根据答案判断是哪位球星
-          this.player_url='/static/imgs/result/C罗@2x.png'
-          this.user_name='郭小丹'
+          this.player_url='/static/imgs/result/C罗@2x.png'   
           this.player_name='C罗'
+           this.user_name=this.$route.query.user_name
       },
       reStart(){
         this.$router.push({name:'Enter'})
