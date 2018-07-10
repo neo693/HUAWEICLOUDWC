@@ -13,9 +13,25 @@
     <audio src="/static/bgm/music2.mp3" autoplay id="audio" loop></audio>
     <script>
       //  背景音乐自动播放
+      var bgMusic = document.getElementById('audio');
       document.addEventListener("WeixinJSBridgeReady", function () {
-        document.getElementById('audio').play();
+        bgMusic.play();
       }, false);
+
+      function onBridgeReady(){
+        WeixinJSBridge.call('hideToolbar');
+      }
+
+      if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+          document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }else if (document.attachEvent){
+          document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+          document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+      }else{
+        onBridgeReady();
+      }
     </script>
     <script src="/static/js/preloadjs.min.js" type="text/javascript"></script>
     <script src="https://cdn.bootcss.com/animejs/2.2.0/anime.min.js" type="text/javascript"></script>
