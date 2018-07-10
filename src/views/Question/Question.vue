@@ -114,6 +114,8 @@
       setTimeout(() => {
         this.FSAnimate()
       }, 500)
+
+      window.bgMusic.volume = 0.2
     }
   }
 </script>
