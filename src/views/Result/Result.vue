@@ -352,7 +352,7 @@
           .intro{
             z-index: 2;
             position: absolute;
-            top:435px;
+            bottom: 67px;
             left:24px;
             width: 312px;
             height: 108px;
@@ -368,7 +368,7 @@
           .btn-l{
             z-index: 2;
             position: absolute;
-            top:548px;
+            bottom: 14px;
             left:54px;
             width: 117px;
             height: 47px;
@@ -376,7 +376,7 @@
           .btn-r{
             z-index: 2;
             position: absolute;
-            top:548px;
+            bottom: 14px;
             left:210px;
             width: 117px;
             height: 47px;
