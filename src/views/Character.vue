@@ -23,8 +23,8 @@
        </div>
        <img src="/static/imgs/toast.png" v-show="show_toast" class="toast">
       <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
-      <img src="/static/video/video2.gif" class="video-attack" v-show="show_defence_video">
-      <img src="/static/video/video1.gif" class="video-attack" v-show="show_attack_video">
+      <img src="/static/video/video1.gif" class="video-attack" v-if="show_defence_video">
+      <img src="/static/video/video1.gif" class="video-attack" v-if="show_attack_video">
       <audio src="/static/video/足球准备.mp3" ref="video_bgm" loop></audio>
     </div>
 </template>
@@ -117,7 +117,7 @@
             setTimeout(()=>{
               this.$refs.video_bgm.pause()
               this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:2}})
-            },6000)
+            },5000)
           }else{
             this.show_toast=true
             setTimeout(()=>{

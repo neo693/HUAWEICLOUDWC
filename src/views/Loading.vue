@@ -232,7 +232,7 @@
          left:0;
          right:0;
          top:185px;
-        animation: rotate 3s linear infinite;
+        animation: rotate 0.5s linear infinite;
         transform-origin: 50% 50%;
       }
       @keyframes rotate{from{transform: rotate(0deg)}

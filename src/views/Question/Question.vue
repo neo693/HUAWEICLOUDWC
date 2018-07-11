@@ -65,10 +65,11 @@
         this.selected = answer
 
         // 播放声音
+        document.getElementById('audio').volume=0.05
         let soundID = `${this.$route.query.type == 1 ? 'G' : 'F'}${this.$route.name.slice(-1)}${this.selected}`
         createjs.Sound.play(soundID).on('complete', () => {
           console.log('配音播放结束')
-
+          document.getElementById('audio').volume=1
           // 进入下一页
           // 如果是问题1或者2就进入下一个问题
           // 首先得播放动画再进入下一页
@@ -100,7 +101,7 @@
                   [this.$route.name.toLowerCase()]: this.selected
                 })
               })
-            }, 4652)
+            }, 4500)
 
           }
         })
@@ -133,7 +134,7 @@
         this.FSAnimate()
       }, 500)
 
-      window.bgMusic.volume = 0.2
+      //window.bgMusic.volume = 0.2
       window.bgMusic.play()
     }
   }

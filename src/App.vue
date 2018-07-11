@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view :key="key"/>
     <img src="/static/imgs/result/音乐@2x.png" class="music-btn" v-if="show_bg_music" @click="pauseMusic">
      <img src="/static/imgs/result/禁止播放态@2x.png" class="music-btn" v-else @click="palyMusic">
   </div>
@@ -24,6 +24,11 @@ export default {
 
        document.getElementById('audio').pause()
        this.show_bg_music=false
+    }
+  },
+  computed:{
+    key:function() {
+      return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
     }
   }
 }

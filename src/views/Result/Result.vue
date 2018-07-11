@@ -1,7 +1,13 @@
 <template>
   <div class="result">
     <div class="wrapper" v-show="!show_video">
-      <img src="/static/imgs/result/logo@2x.png" class="logo">
+      <div class="logo">
+        <img src="/static/imgs/result/logo@2x.png" class="logo-img">
+        <span style="margin-left: 11px">
+          华为云丨有技术 有未来 值得信赖
+        </span>
+      </div>
+
       <!-- <img src="/static/imgs/result/文案：C罗@2x.png" class="txt-wrapper"> -->
       <div class="txt-wrapper">
         <div>
@@ -317,8 +323,12 @@
             position: relative;
             left:15px;
             top:10px;
-            width: 190px;
+            width: 100%;
             height: 45px;
+            .logo-img{
+              width: 44px;
+              height: 45px;
+            }
           }
           .txt-wrapper{
             position: absolute;
