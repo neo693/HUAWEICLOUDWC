@@ -22,30 +22,35 @@
         show_hit:false,
         music_url:'/static/imgs/打开声音@2x.png',
         time_dur:1000,
-        time_delay:300
-
+        time_delay:300,
+        ball1:'',
+        man2:''
       }
     },
     methods:{
       start(){
         this.$router.push({name:'Character'})
       },
+      /*animate(){
+        let basicTimeline = anime.timeline();
+        basicTimeline.add(
+          {
+
+          }
+        )
+      },*/
       animate(){
         let that=this
-        let ball1=anime({
+        this.ball1=anime({
           targets: '.ball1',
           translateX:[-200,0],
           translateY: [-100,0],
-          rotate: {
-            value: 360,
-            duration: 1000,
-            easing: 'easeInOutSine'
-          },
           duration: that.time_dur,
+          rotate:'3turn',
           loop: false,
           easing: 'linear'
         })
-        let man2=anime({
+         this.man2=anime({
           targets: '.man2',
           translateX:[275,0],
           translateY: [467,0],
@@ -53,7 +58,7 @@
           loop: false,
           easing: 'linear'
         })
-        man2.finished.then(()=>{
+        this.man2.finished.then(()=>{
           setTimeout(()=>{
             this.show_head_ball=false
             this.show_gate=true
@@ -81,24 +86,18 @@
                     targets: '.ball2',
                     translateX:[475,0],
                     translateY: [50,0],
-                    rotate: {
-                      value: 360,
-                      duration: that.time_dur,
-                      easing: 'easeInOutSine'
-                    },
                     duration: that.time_dur,
+                    rotate:'3turn',
                     loop: false,
                     easing: 'linear'
                   }
                 )
                 ball2.finished.then(()=>{
                   setTimeout(()=>{
-                    this.show_gate=false
-                    this.show_hit=false
-                    this.show_head_ball=true
-                    this.animate()
+                    that.show_gate=false
+                    that.show_hit=false
+                    that.show_head_ball=true
                   },that.time_delay)
-
                 })
               },that.time_delay)
             })
@@ -117,6 +116,9 @@
     },
     mounted(){
       this.animate()
+      setInterval(()=>{
+        this.animate()
+      },3900)
       setTimeout(()=>{
         this.show_btn=true
       },1000)
