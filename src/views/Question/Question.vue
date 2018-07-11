@@ -7,7 +7,25 @@
     </template>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
     <img src="/static/video/video3.gif" v-show="show_video" class="result-video">
-    <audio src="/static/video/shemen.mp3" id="video_bgm" ref="video_bgm" autoplay></audio>
+    <audio src="/static/video/shemen.mp3" id="video_bgm" ref="video_bgm"></audio>
+
+    <!--防守型轨迹-->
+    <img src="/static/imgs/guiji/F1.png" alt="" class="F1 FG">
+    <img src="/static/imgs/guiji/F2.png" alt="" class="F2 FG">
+    <img src="/static/imgs/guiji/F3.png" alt="" class="F3 FG">
+    <img src="/static/imgs/guiji/F4.png" alt="" class="F4 FG">
+    <img src="/static/imgs/guiji/F5.png" alt="" class="F5 FG">
+    <img src="/static/imgs/guiji/F6.png" alt="" class="F6 FG">
+    <img src="/static/imgs/guiji/F7.png" alt="" class="F7 FG">
+
+    <!--进攻型轨迹-->
+    <img src="/static/imgs/guiji/G1.png" alt="" class="G1 FG">
+    <img src="/static/imgs/guiji/G2.png" alt="" class="G2 FG">
+    <img src="/static/imgs/guiji/G3.png" alt="" class="G3 FG">
+    <img src="/static/imgs/guiji/G4.png" alt="" class="G4 FG">
+    <img src="/static/imgs/guiji/G5.png" alt="" class="G5 FG">
+    <img src="/static/imgs/guiji/G6.png" alt="" class="G6 FG">
+    <img src="/static/imgs/guiji/G7.png" alt="" class="G7 FG">
   </div>
 </template>
 
@@ -113,15 +131,124 @@
         var timeline = anime.timeline()
         timeline
           .add({
-            targets: '.question-ball',
-            top: -100,
-            left: 150,
-            easing: [0.58, 0.005, 1.00, 0.48],
-            duration: 600
+            targets: '.F1',
+            translateX: [-100, -150],
+            translateY: [0, 300],
+            opacity: 0,
+            rotate: '0.1turn',
+            scale: 0.6,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.F3',
+            translateX: [0, -200],
+            translateY: [0, -600],
+            opacity: 0,
+            rotate: '0.1turn',
+            scale: 0.6,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.F4',
+            translateX: [0, 600],
+            translateY: [0, 80],
+            opacity: 0,
+            scale: 0.6,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.F5',
+            translateX: [0, -600],
+            translateY: [0, 120],
+            opacity: 0,
+            scale: 0.9,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.F6',
+            translateX: [0, 600],
+            translateY: [0, -60],
+            opacity: 0,
+            scale: 1.2,
+            rotate: '-0.1turn',
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.F7',
+            translateX: [0, -300],
+            translateY: [0, -300],
+            opacity: 0,
+            rotate: '-0.1turn',
+            easing: 'linear',
+            duration: 400
           })
           .finished
           .then(() => {
-            console.log('动画完了')
+            console.log('防守动画完了')
+            this.begin = true
+          })
+      },
+      // 防守类的球轨迹
+      JGAnimate() {
+        var timeline = anime.timeline()
+        timeline
+          .add({
+            targets: '.G1',
+            translateX: [0, -60, 0],
+            translateY: [0, -800],
+            opacity: 0,
+            scale: 0.6,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.G3',
+            translateX: [0, -700],
+            translateY: [0, 270],
+            opacity: 0,
+            easing: 'linear',
+            duration: 500
+          })
+          .add({
+            targets: '.G4',
+            translateX: [0, 600],
+            translateY: [0, 200],
+            opacity: 0,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.G5',
+            translateX: [0, -600],
+            translateY: [0, -50],
+            opacity: 0,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.G6',
+            translateX: [0, 600],
+            translateY: [0, -150],
+            opacity: 0,
+            easing: 'linear',
+            duration: 400
+          })
+          .add({
+            targets: '.G7',
+            translateX: [0, -600],
+            translateY: [0, -50],
+            opacity: 0,
+            easing: 'linear',
+            duration: 400
+          })
+          .finished
+          .then(() => {
+            console.log('防守动画完了')
             this.begin = true
           })
       },
@@ -132,12 +259,30 @@
     },
     mounted() {
       // 防守类球轨迹
-      setTimeout(() => {
+      document.querySelectorAll('.FG').forEach(ele => {
+        ele.removeAttribute('style')
+      })
+      if (this.$route.query.type == 1) {
+        this.JGAnimate()
+      } else {
         this.FSAnimate()
-      }, 500)
+      }
 
       //window.bgMusic.volume = 0.2
       window.bgMusic.play()
+    },
+    watch: {
+      '$route'() {
+        document.querySelectorAll('.FG').forEach(ele => {
+          ele.removeAttribute('style')
+        })
+        // 防守类球轨迹
+        if (this.$route.query.type == 1) {
+          this.JGAnimate()
+        } else {
+          this.FSAnimate()
+        }
+      }
     }
   }
 </script>
@@ -159,5 +304,93 @@
     height: 100%;
     position: relative;
     z-index: 10;
+  }
+  .FG {
+    position: absolute;
+    top: -300px;
+    right: 0;
+  }
+  .F1 {
+    width: 124px;
+    height: 290px;
+    top: -300px;
+    right: 0;
+  }
+  .F2 {
+    width: 163px;
+    height: 135px;
+  }
+  .F3 {
+    width: 96px;
+    height: 184px;
+    top: 400px;
+    right: -200px;
+  }
+  .F4 {
+    width: 298px;
+    height: 104px;
+    top: 50px;
+    left: -300px;
+  }
+  .F5 {
+    width: 316px;
+    height: 122px;
+    top: 100px;
+    right: -300px;
+  }
+  .F6 {
+    width: 331px;
+    height: 88px;
+    top: 150px;
+    left: -400px;
+  }
+  .F7 {
+    width: 285px;
+    height: 214px;
+    top: 200px;
+    right: -300px;
+  }
+  .G1 {
+    width: 151px;
+    height: 273px;
+    bottom: -300px;
+    right: 50px;
+    top: inherit;
+  }
+  .G2 {
+    width: 133px;
+    height: 159px;
+  }
+  .G3 {
+    width: 159px;
+    height: 111px;
+    top: -150px;
+    right: -100px;
+  }
+  .G4 {
+    width: 304px;
+    height: 132px;
+    top: 100px;
+    right: initial;
+    left: -300px;
+  }
+  .G5 {
+    width: 317px;
+    height: 86px;
+    top: 240px;
+    right: -300px;
+  }
+  .G6 {
+    width: 344px;
+    height: 144px;
+    top: 150px;
+    right: initial;
+    left: -400px;
+  }
+  .G7 {
+    width: 275px;
+    height: 80px;
+    top: 100px;
+    right: -300px;
   }
 </style>

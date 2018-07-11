@@ -287,7 +287,7 @@
             if (this.selected == 'A') {
               anime({
                 targets: '.banner1img',
-                translateX: [-300, 0],
+                translateX: [-600, 0],
                 duration: 400,
                 easing: 'linear'
               })
