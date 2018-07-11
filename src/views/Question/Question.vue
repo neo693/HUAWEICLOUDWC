@@ -154,5 +154,7 @@
   .result-video {
     width: 100%;
     height: 100%;
+    position: relative;
+    z-index: 10;
   }
 </style>

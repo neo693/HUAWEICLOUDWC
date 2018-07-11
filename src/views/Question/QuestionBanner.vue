@@ -246,7 +246,24 @@
           if (this.$route.query.type == 2 && this.$route.query.question1 && !this.$route.query.question2) {
             // 进攻型第二题
             if (this.selected == 'A') {
-              // TODO: 防守型第二题A选项缺图
+              document.querySelector('.banner3img').style.opacity = 0
+              document.querySelector('.banner4img').style.opacity = 0
+              anime({
+                targets: ['.banner1img', '.banner2img'],
+                opacity: 0,
+                duration: 600,
+                easing: 'linear'
+              })
+              anime({
+                targets: ['.banner3img'],
+                opacity: 1,
+                scale: [0.8, 1],
+                duration: 400,
+                easing: 'linear'
+              }).finished.then(() => {
+                document.querySelector('.banner3img').style.opacity = 0
+                document.querySelector('.banner4img').style.opacity = 1
+              })
             } else if (this.selected == 'B') {
               anime({
                 targets: '.banner1img',
@@ -268,7 +285,12 @@
           if (this.$route.query.type == 2 && this.$route.query.question1 && this.$route.query.question2) {
             // 防守型第三题
             if (this.selected == 'A') {
-              // TODO: 防守第三题的A没有图
+              anime({
+                targets: '.banner1img',
+                translateX: [-300, 0],
+                duration: 400,
+                easing: 'linear'
+              })
             } else if (this.selected == 'B') {
               anime({
                 targets: '.banner1img',
