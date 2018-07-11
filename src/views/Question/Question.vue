@@ -7,6 +7,7 @@
     </template>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
     <img src="/static/video/video3.gif" v-show="show_video" class="result-video">
+    <audio src="/static/video/shemen.mp3" id="video_bgm" ref="video_bgm" autoplay></audio>
   </div>
 </template>
 
@@ -87,11 +88,12 @@
 
             this.show_video = true
             // 注册声音
-            createjs.Sound.alternateExtensions = ["mp3"];
+            /*createjs.Sound.alternateExtensions = ["mp3"];
             createjs.Sound.registerSound({src:"/static/video/shemen.mp3", id:"resultSound"});
             createjs.Sound.on("fileload", () => {
               createjs.Sound.play("resultSound");
-            });
+            });*/
+            this.$refs.video_bgm.play()
 
             setTimeout(() => {
               window.bgMusic.play()
