@@ -4,6 +4,7 @@
     <QuestionTitle></QuestionTitle>
     <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
+    <!--<img src="" v-if="show_video">-->
   </div>
 </template>
 
@@ -20,6 +21,7 @@
         selected: false,
         // 开场动画
         begin: false,
+        show_video:false
       }
     },
     methods: {

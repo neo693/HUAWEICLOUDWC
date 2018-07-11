@@ -4,10 +4,10 @@
    <!-- <img src="/static/imgs/群組1@2x.png" alt="man" class="man1 animated slideInLeft" >-->
 
     <img src="/static/imgs/enter/head.png" class="man2" v-show="show_head_ball">
-    <img src="/static/imgs/enter/ball1.png" class="ball1" v-show="show_head_ball">
+    <img src="/static/imgs/enter/ball11.png" class="ball1" v-show="show_head_ball">
     <img src="/static/imgs/enter/gate.png" class="gate" v-show="show_gate">
     <img src="/static/imgs/enter/hit.png" class="hit" v-show="show_hit">
-    <img src="/static/imgs/enter/ball2.png" class="ball2" v-show="show_hit">
+    <img src="/static/imgs/enter/ball22.png" class="ball2" v-show="show_hit">
     <img src="/static/imgs/开启测试之旅@2x.png" alt="start" class="start animated fadeIn" @click="start" v-show="show_btn">
     <img :src="music_url" alt="music" class="music animated fadeIn" v-show="show_btn" @click="switchMusic">
   </div>
@@ -32,10 +32,15 @@
       },
       animate(){
         let that=this
-        let ball2=anime({
+        let ball1=anime({
           targets: '.ball1',
           translateX:[-200,0],
           translateY: [-100,0],
+          rotate: {
+            value: 360,
+            duration: 1000,
+            easing: 'easeInOutSine'
+          },
           duration: that.time_dur,
           loop: false,
           easing: 'linear'
@@ -76,6 +81,11 @@
                     targets: '.ball2',
                     translateX:[475,0],
                     translateY: [50,0],
+                    rotate: {
+                      value: 360,
+                      duration: that.time_dur,
+                      easing: 'easeInOutSine'
+                    },
                     duration: that.time_dur,
                     loop: false,
                     easing: 'linear'
@@ -171,10 +181,9 @@
       .ball1{
         position: absolute;
         display: block;
-        width: 375px;
+        width: 75px;
+        top:142px;
         left:0;
-        right: 0;
-        margin: auto;
       }
       .gate{
         position: absolute;
@@ -195,10 +204,9 @@
       .ball2{
         position: absolute;
         display: block;
-        width: 375px;
-        left:0;
-        right: 0;
-        margin: auto;
+        width: 61px;
+        top:122px;
+        left:90px;
       }
     }
 </style>
