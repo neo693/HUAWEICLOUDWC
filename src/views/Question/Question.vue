@@ -1,10 +1,10 @@
 <template>
   <div class="question-wrap">
-    <tempalte v-show="!show_video">
+    <template v-show="!show_video">
       <QuestionBanner :selected="selected"></QuestionBanner>
       <QuestionTitle></QuestionTitle>
       <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
-    </tempalte>
+    </template>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
     <img src="/static/video/video3.gif" v-show="show_video" class="result-video">
   </div>

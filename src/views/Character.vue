@@ -55,9 +55,10 @@
           let that=this
           this.ball=anime({
             targets: '.player-ball',
-            translateX:[-200,0],
-            translateY: [-100,0],
+            translateX:[80,0],
+            translateY: [80,0],
             duration: 1000,
+            scale: [0.5,1],
             rotate:'3turn',
             loop: false,
             easing: 'linear',
