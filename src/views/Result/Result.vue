@@ -5,11 +5,10 @@
       <!-- <img src="/static/imgs/result/文案：C罗@2x.png" class="txt-wrapper"> -->
       <div class="txt-wrapper">
         <div>
-          <b class="name">{{user_name}}</b>
+          <b class="name" >{{user_name}}</b>
         </div>
-
         <div>
-          <b>
+          <b >
             天哪!你的脚法已经和
             <span class="player-name">
             {{player_name}}
@@ -19,7 +18,7 @@
         </div>
 
       </div>
-      <img src="/static/imgs/result/氛围@2x.png" class="line">
+      <!--<img src="/static/imgs/result/氛围@2x.png" class="line">-->
       <img src="/static/imgs/result/华为云MLS机器学习平台@2x.png" class="intro">
       <img src="/static/imgs/result/保存图片@2x.png" class="save" @click="savePic">
       <img src="/static/imgs/result/不服再战@2x.png" class="btn-l" @click="reStart">
@@ -27,6 +26,7 @@
       <img :src="player_url" class="player">
     </div>
     <img src="/static/video/video3.gif" class="video" v-show="show_video">
+    <audio src="/static/video/高清射门.ogg" id="video_bgm" ref="video_bgm" autoplay></audio>
   </div>
 </template>
 <script>
@@ -94,6 +94,7 @@
     },
     methods:{
       init(){
+        this.$refs.video_bgm.play()
         setTimeout(()=>{
           this.show_video=false
         },4652)
@@ -110,6 +111,7 @@
       },
       go(){
         // 跳转华为链接
+
       },
       savePic(){
         // 保存图片
@@ -287,7 +289,7 @@
 
       }
     },
-    created(){
+    mounted(){
       this.init()
     }
 
@@ -298,8 +300,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-       /* background: url('/static/imgs/result/背景@2x.png') no-repeat center fixed;
-       background-size: 375px 667px;*/
+        background: url('/static/imgs/result/氛围@2x.png') no-repeat center 127px;
         .wrapper{
           width: 375px;
           height: 100%;
@@ -325,11 +326,13 @@
             padding-left:30px;
             padding-top: 20px;
             box-sizing: border-box;
-            background: url('/static/imgs/result/文案：C罗@2x.png') no-repeat;
+            background: url('/static/imgs/result/文案：C罗@2x.png') no-repeat center;
+            background-size:348px 87px;
             .name{
               color:#BF2626;
               font-size:24px;
               font-style: italic;
+
             }
             .player-name{
               color:#BF2626;

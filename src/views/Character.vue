@@ -22,8 +22,8 @@
        </div>
        <img src="/static/imgs/toast.png" v-show="show_toast" class="toast">
       <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
-      <img src="/static/video/video1.gif" class="video-attack" v-show="show_defence_video">
-      <img src="/static/video/video2.gif" class="video-attack" v-show="show_attack_video">
+      <img src="/static/video/video2.gif" class="video-attack" v-show="show_defence_video">
+      <img src="/static/video/video1.gif" class="video-attack" v-show="show_attack_video">
       <audio src="/static/bgm/music.mp3" ref="video_bgm" loop></audio>
     </div>
 </template>
