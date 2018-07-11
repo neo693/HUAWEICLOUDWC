@@ -26,7 +26,7 @@
       <img :src="player_url" class="player">
     </div>
     <img src="/static/video/video3.gif" class="video" v-show="show_video">
-   
+
   </div>
 </template>
 <script>
