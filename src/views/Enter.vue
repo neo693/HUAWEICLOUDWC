@@ -22,7 +22,7 @@
         show_hit:false,
         music_url:'/static/imgs/打开声音@2x.png',
         time_dur:1000,
-        time_delay:300,
+        time_delay:600,
         ball1:'',
         man2:'',
         ball2:''
@@ -109,17 +109,19 @@
     },
     mounted(){
       this.animate()
+      let time1=this.time_dur*3+this.time_delay*3
+      let time2=this.time_dur*2+this.time_delay*2
       setInterval(()=>{
         this.ball1.restart()
         this.animate()
         setTimeout(()=>{
           this.ball2.restart()
-        },2600)
+        },time2)
 
-      },3900)
+      },time1)
       setTimeout(()=>{
         this.show_btn=true
-      },1000)
+      },time1)
     }
   }
 </script>
