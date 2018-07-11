@@ -16,7 +16,7 @@ export default {
   },
   methods:{
     palyMusic(){
-      
+
        document.getElementById('audio').play()
        this.show_bg_music=true
     },
@@ -56,5 +56,6 @@ export default {
     top:14px;
     width: 33px;
     height: 33px;
+    z-index:9;
   }
 </style>

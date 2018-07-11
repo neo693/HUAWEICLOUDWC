@@ -6,7 +6,8 @@
          </div>
          <!--<img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else>-->
        </div>
-      <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
+      <img src="/static/imgs/character/ball.png"  class="player-ball" onclick="return false;" v-show="is_attack">
+      <img src="/static/imgs/character/attack.png"  class="player-attack" onclick="return false;" v-show="is_attack">
       <img  src="/static/imgs/character/defence-player.png" alt="player" class="player-defense animated slideInUp" onclick="return false;" v-show="!is_attack">
       <div class="arrows">
         <img src="/static/imgs/character/l-arrow@2x.png" alt="左箭头" class="l-arrow" @click="Arrow">
@@ -24,13 +25,13 @@
       <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
       <img src="/static/video/video2.gif" class="video-attack" v-show="show_defence_video">
       <img src="/static/video/video1.gif" class="video-attack" v-show="show_attack_video">
-      <audio src="/static/bgm/music.mp3" ref="video_bgm" loop></audio>
+      <audio src="/static/video/足球准备.mp3" ref="video_bgm" loop></audio>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Character",
+      name: "Character",
       data(){
           return {
             params:{
@@ -44,10 +45,32 @@
             is_attack:true,
             show_toast:false,
             show_attack_video:false,
-            show_defence_video:false
+            show_defence_video:false,
+             ball:'',
+            man:''
           }
       },
       methods:{
+        animate(){
+          let that=this
+          this.ball=anime({
+            targets: '.player-ball',
+            translateX:[-200,0],
+            translateY: [-100,0],
+            duration: 1000,
+            rotate:'3turn',
+            loop: false,
+            easing: 'linear',
+          })
+          this.man=anime({
+            targets: '.player-attack',
+            translateX:[275,0],
+            translateY: [467,0],
+            duration: 1000,
+            loop: false,
+            easing: 'linear'
+          })
+        },
         showInput(){
             this.show_input=true
         },
@@ -61,6 +84,8 @@
           this.btn_url='/static/imgs/character/type-chose@2x.png'
           this.params.type=1
           this.is_attack=true
+          this.ball.restart()
+          this.man.restart()
         },
         chooseDefence(){
           this.btn_url='/static/imgs/character/type-chose2@2x.png'
@@ -83,7 +108,7 @@
             setTimeout(()=>{
               this.$refs.video_bgm.pause()
               this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:1}})
-            },5099)
+            },5000)
           }else if(this.params.type==2 && this.params.user_name!==''){
             document.getElementById('audio').pause()
             this.$refs.video_bgm.play()
@@ -99,6 +124,9 @@
             },2000)
           }
         }
+      },
+      mounted(){
+        this.animate()
       }
     }
 </script>
@@ -134,6 +162,7 @@
           box-sizing: border-box;
           &.focus {
             background: url('/static/imgs/输入姓名@2x_1.png') no-repeat center;
+            background-size: 182px 59px;
           }
           .txt{
             width: 140px;
@@ -154,6 +183,13 @@
           input:focus { outline: none;background: #fff;border:none;}
         }
 
+      }
+      .player-ball{
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        left:53px;
+        top:74px;
       }
       .player-attack{
         width: 297px;
@@ -270,7 +306,7 @@
         left:0;
         right: 0;
         top:0;
-        z-index: 5;
+        z-index: 10;
       }
     }
 </style>
