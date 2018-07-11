@@ -25,7 +25,7 @@
       <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
       <img src="/static/video/video2.gif" class="video-attack" v-show="show_defence_video">
       <img src="/static/video/video1.gif" class="video-attack" v-show="show_attack_video">
-      <audio src="/static/video/足球准备清晰.ogg" ref="video_bgm" loop></audio>
+      <audio src="/static/video/足球准备.mp3" ref="video_bgm" loop></audio>
     </div>
 </template>
 

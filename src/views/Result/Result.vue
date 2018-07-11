@@ -96,7 +96,7 @@
       init(){
         // 注册声音
         createjs.Sound.alternateExtensions = ["mp3"];
-        createjs.Sound.registerSound("/static/video/高清射门.ogg", "resultSound");
+        createjs.Sound.registerSound("/static/video/高清射门.mp3", "resultSound");
         createjs.Sound.play('resultSound')
         // this.$refs.video_bgm.play()
         setTimeout(()=>{

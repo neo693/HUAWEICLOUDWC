@@ -24,21 +24,14 @@
         time_dur:1000,
         time_delay:300,
         ball1:'',
-        man2:''
+        man2:'',
+        ball2:''
       }
     },
     methods:{
       start(){
         this.$router.push({name:'Character'})
       },
-      /*animate(){
-        let basicTimeline = anime.timeline();
-        basicTimeline.add(
-          {
-
-          }
-        )
-      },*/
       animate(){
         let that=this
         this.ball1=anime({
@@ -81,7 +74,7 @@
                   loop: false,
                   easing: 'linear'
                 })
-                let ball2=anime(
+                 this.ball2=anime(
                   {
                     targets: '.ball2',
                     translateX:[475,0],
@@ -92,7 +85,7 @@
                     easing: 'linear'
                   }
                 )
-                ball2.finished.then(()=>{
+                this.ball2.finished.then(()=>{
                   setTimeout(()=>{
                     that.show_gate=false
                     that.show_hit=false
@@ -117,7 +110,12 @@
     mounted(){
       this.animate()
       setInterval(()=>{
+        this.ball1.restart()
         this.animate()
+        setTimeout(()=>{
+          this.ball2.restart()
+        },2600)
+
       },3900)
       setTimeout(()=>{
         this.show_btn=true
