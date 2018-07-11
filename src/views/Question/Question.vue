@@ -94,12 +94,12 @@
 
             setTimeout(() => {
               window.bgMusic.play()
-              /*this.$router.push({
+              this.$router.push({
                 name: 'Result',
                 query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
                   [this.$route.name.toLowerCase()]: this.selected
                 })
-              })*/
+              })
             }, 4652)
 
           }
