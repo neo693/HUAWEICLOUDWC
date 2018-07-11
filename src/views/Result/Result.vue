@@ -26,7 +26,7 @@
       <img :src="player_url" class="player">
     </div>
     <img src="/static/video/video3.gif" class="video" v-show="show_video">
-    <!--<audio src="/static/video/高清射门.ogg" id="video_bgm" ref="video_bgm" autoplay></audio>-->
+   
   </div>
 </template>
 <script>

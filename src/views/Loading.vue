@@ -179,6 +179,9 @@
           {'src':'/static/imgs/result/拉莫斯@2x.png','id':159},
           {'src':'/static/imgs/result/阿扎尔@2x.png','id':160},
           {'src':'/static/imgs/result/马塞洛@2x.png','id':161},
+          {'src':'/static/video/video3.gif','id':162},
+          {'src':'/static/video/足球准备.mp3','id':163},
+          {'src':'/static/video/高清射门.MP3','id':164},
         ],
         progress:[],
         bar_width:0
