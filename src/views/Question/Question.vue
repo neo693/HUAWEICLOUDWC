@@ -1,10 +1,10 @@
 <template>
   <div class="question-wrap">
-    <tempalte v-show="!show_video">
+    <template v-show="!show_video">
       <QuestionBanner :selected="selected"></QuestionBanner>
       <QuestionTitle></QuestionTitle>
       <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
-    </tempalte>
+    </template>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
     <img src="/static/video/video3.gif" v-show="show_video" class="result-video">
   </div>
@@ -94,12 +94,12 @@
 
             setTimeout(() => {
               window.bgMusic.play()
-              this.$router.push({
+              /*this.$router.push({
                 name: 'Result',
                 query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
                   [this.$route.name.toLowerCase()]: this.selected
                 })
-              })
+              })*/
             }, 4652)
 
           }
@@ -154,5 +154,7 @@
   .result-video {
     width: 100%;
     height: 100%;
+    position: relative;
+    z-index: 10;
   }
 </style>
