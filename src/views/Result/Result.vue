@@ -25,7 +25,6 @@
       <img src="/static/imgs/result/精准预测@2x.png" class="btn-r" @click="go">
       <img :src="player_url" class="player">
     </div>
-    <img src="/static/video/video3.gif" class="video" v-show="show_video">
     <!--<audio src="/static/video/高清射门.ogg" id="video_bgm" ref="video_bgm" autoplay></audio>-->
   </div>
 </template>
@@ -89,15 +88,14 @@
             url:'/static/imgs/result/拉莫斯@2x.png'
           }
         ],
-        show_video:true
+        show_video:false
       }
     },
     methods:{
       init(){
-        // 注册声音
-        createjs.Sound.alternateExtensions = ["mp3"];
-        createjs.Sound.registerSound("/static/video/高清射门.ogg", "resultSound");
-        createjs.Sound.play('resultSound')
+
+
+
         // this.$refs.video_bgm.play()
         setTimeout(()=>{
           this.show_video=false
@@ -295,6 +293,7 @@
     },
     mounted(){
       this.init()
+
     }
 
   }

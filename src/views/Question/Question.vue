@@ -1,10 +1,12 @@
 <template>
   <div class="question-wrap">
-    <QuestionBanner :selected="selected"></QuestionBanner>
-    <QuestionTitle></QuestionTitle>
-    <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
+    <tempalte v-show="!show_video">
+      <QuestionBanner :selected="selected"></QuestionBanner>
+      <QuestionTitle></QuestionTitle>
+      <QuestionFooter @select="select" :selected="selected"></QuestionFooter>
+    </tempalte>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
-    <!--<img src="" v-if="show_video">-->
+    <img src="/static/video/video3.gif" v-show="show_video" class="result-video">
   </div>
 </template>
 
@@ -80,12 +82,26 @@
             })
             this.selected = false
           } else {
-            this.$router.push({
-              name: 'Result',
-              query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
-                [this.$route.name.toLowerCase()]: this.selected
+            window.bgMusic.pause()
+
+            this.show_video = true
+            // 注册声音
+            createjs.Sound.alternateExtensions = ["mp3"];
+            createjs.Sound.registerSound({src:"/static/video/shemen.mp3", id:"resultSound"});
+            createjs.Sound.on("fileload", () => {
+              createjs.Sound.play("resultSound");
+            });
+
+            setTimeout(() => {
+              window.bgMusic.play()
+              this.$router.push({
+                name: 'Result',
+                query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
+                  [this.$route.name.toLowerCase()]: this.selected
+                })
               })
-            })
+            }, 4652)
+
           }
         })
       },
@@ -118,6 +134,7 @@
       }, 500)
 
       window.bgMusic.volume = 0.2
+      window.bgMusic.play()
     }
   }
 </script>
@@ -133,5 +150,9 @@
     position: fixed;
     top: 700px;
     left: 200px;
+  }
+  .result-video {
+    width: 100%;
+    height: 100%;
   }
 </style>
