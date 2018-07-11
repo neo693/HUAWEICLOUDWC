@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="showBanner">
     <!--不管三七二十一，上来就是四张图，够了-->
     <img :src="ImgSrc1" alt="" class="banner1img">
     <img :src="ImgSrc2" alt="" class="banner2img">
@@ -14,7 +14,7 @@
       props: ['selected'],
       data() {
         return {
-
+          showBanner: false
         }
       },
       computed: {
@@ -288,11 +288,14 @@
         }
       },
       watch: {
-        '$route'() {
-          this.show = true
-        },
         selected() {
+          this.showBanner = true
           this.ballAnimate()
+        },
+        '$route'() {
+          if (!this.selected) {
+            this.showBanner = false
+          }
         }
       }
     }
