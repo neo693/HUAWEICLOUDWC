@@ -1,11 +1,11 @@
 <template>
   <div>
-    <img :src="imgSrcA" alt="" @click="select('A')">
-    <i class="pulse infinite" :class="{animated:!selected}" v-show="!selected||selected!='A'"></i>
-    <img :src="imgSrcB" alt="" @click="select('B')">
-    <i class="pulse infinite" :class="{animated:!selected}" v-show="!selected||selected!='B'"></i>
-    <img :src="imgSrcC" alt="" @click="select('C')">
-    <i class="pulse infinite" :class="{animated:!selected}" v-show="!selected||selected!='C'"></i>
+    <img :src="imgSrcA" alt="" @click="select('A')" class="imgSrcA">
+    <i class="pulse infinite" :class="{animated:!selected}" v-show="loaded&&(!selected||selected!='A')"></i>
+    <img :src="imgSrcB" alt="" @click="select('B')" class="imgSrcB">
+    <i class="pulse infinite" :class="{animated:!selected}" v-show="loaded&&(!selected||selected!='B')"></i>
+    <img :src="imgSrcC" alt="" @click="select('C')" class="imgSrcC">
+    <i class="pulse infinite" :class="{animated:!selected}" v-show="loaded&&(!selected||selected!='C')"></i>
   </div>
 </template>
 
@@ -13,6 +13,11 @@
   export default {
     name: "QuestionFooter",
     props: ['selected'],
+    data() {
+      return {
+        loaded: false
+      }
+    },
     computed: {
       imgSrcA() {
         return `/static/imgs/QuestionFooter${this.$route.query.type}/${this.$route.name}A${this.selected == 'A'?'Selected':''}.png`
@@ -29,6 +34,40 @@
         // 选择答案后不可更改
         if (this.selected) return
         this.$emit('select', answer)
+      },
+      Animate() {
+        this.loaded = false
+        anime({
+          targets: '.imgSrcA',
+          translateX: [-600, 0],
+          translateY: [-100, 0],
+          easing: 'linear',
+          duration: 800
+        })
+        anime({
+          targets: '.imgSrcB',
+          translateX: [600, 0],
+          translateY: [-100, 0],
+          easing: 'linear',
+          duration: 800
+        })
+        anime({
+          targets: '.imgSrcC',
+          translateY: [600, 0],
+          easing: 'linear',
+          duration: 800
+        }).finished.then(() => {
+          // 动画完了之后abc才开始闪
+          this.loaded = true
+        })
+      }
+    },
+    mounted() {
+      this.Animate()
+    },
+    watch: {
+      '$route'() {
+        this.Animate()
       }
     }
   }

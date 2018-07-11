@@ -1,12 +1,31 @@
 <template>
   <div id="app">
     <router-view/>
+    <img src="/static/imgs/result/音乐@2x.png" class="music-btn" v-if="show_bg_music" @click="pauseMusic">
+     <img src="/static/imgs/result/禁止播放态@2x.png" class="music-btn" v-else @click="palyMusic">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data(){
+    return {
+        show_bg_music:true
+    }
+  },
+  methods:{
+    palyMusic(){
+      
+       document.getElementById('audio').play()
+       this.show_bg_music=true
+    },
+    pauseMusic(){
+
+       document.getElementById('audio').pause()
+       this.show_bg_music=false
+    }
+  }
 }
 </script>
 
@@ -30,5 +49,12 @@ export default {
     background-position: center -58px;
     background-size: cover;
     overflow: hidden;
+  }
+  #app .music-btn{
+    position: fixed;
+    right: 10px;
+    top:14px;
+    width: 33px;
+    height: 33px;
   }
 </style>

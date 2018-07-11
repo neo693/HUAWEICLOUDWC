@@ -1,10 +1,10 @@
 <template>
     <div class="choose-character">
        <div class="your-name" >
-         <div class="txt-wrapper" v-if="show_input">
-           <input type="text" v-model="params.user_name" class="txt"  @blur="lostFocus" autofocus="autofocus">
+         <div class="txt-wrapper" :class="{focus:params.user_name}">
+           <input type="text" v-model="params.user_name" class="txt" :class="{hasValue:params.user_name}"  @blur="lostFocus">
          </div>
-         <img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else>
+         <!--<img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else>-->
        </div>
       <img :src="player_url" alt="player" class="player-attack animated zoomIn" onclick="return false;" v-show="is_attack">
       <img  src="/static/imgs/character/defence-player.png" alt="player" class="player-defense animated slideInUp" onclick="return false;" v-show="!is_attack">
@@ -124,7 +124,7 @@
           display: inline-block;
         }
         .txt-wrapper{
-          background: url('/static/imgs/输入姓名@2x_1.png') no-repeat center;
+          background: url('/static/imgs/输入姓名@2x.png') no-repeat center;
           background-size: 182px 59px;
           width: 182px;
           height: 59px;
@@ -132,6 +132,9 @@
           padding-top: 14px;
           text-align: center;
           box-sizing: border-box;
+          &.focus {
+            background: url('/static/imgs/输入姓名@2x_1.png') no-repeat center;
+          }
           .txt{
             width: 140px;
             height: 30px;
@@ -140,6 +143,13 @@
             border:none;
             text-align: center;
             font-size: 18px;
+            opacity: 0;
+            &:focus {
+              opacity: 1;
+            }
+            &.hasValue {
+              opacity: 1;
+            }
           }
           input:focus { outline: none;background: #fff;border:none;}
         }
@@ -194,7 +204,7 @@
         margin: auto;
         left:0;
         right: 0;
-        top:387px;
+        bottom: 140px;
         z-index: 0;
         .stage{
           display: block;
@@ -210,7 +220,7 @@
         margin: auto;
         left:0;
         right: 0;
-        top:462px;
+        bottom: 80px;
         z-index: 3;
         .btn-img{
           width: 255px;
@@ -237,14 +247,14 @@
         height: 69px;
         margin: auto;
         position: absolute;
-        top:529px;
+        bottom:12px;
         left:0;
         right: 0;
         z-index: 3;
       }
       .toast{
         position:absolute;
-        top:460px;
+        bottom:70px;
         width: 200px;
         height: 75px;
         margin: auto;
