@@ -1,6 +1,6 @@
 <template>
   <div class="result">
-    <div class="wrapper">
+    <div class="wrapper" v-show="!show_video">
       <img src="/static/imgs/result/logo@2x.png" class="logo">
       <!-- <img src="/static/imgs/result/文案：C罗@2x.png" class="txt-wrapper"> -->
       <div class="txt-wrapper">
@@ -26,29 +26,83 @@
       <img src="/static/imgs/result/精准预测@2x.png" class="btn-r" @click="go">
       <img :src="player_url" class="player">
     </div>
-
+    <img src="/static/video/video3.gif" class="video" v-show="show_video">
   </div>
 </template>
 <script>
-  /*1=c罗 2=梅西 3=阿尔扎 4=姆巴佩 5=内马尔 6=遗憾 7=纳瓦斯 8=马塞洛 9=哈尔多松 10=拉莫斯 11=遗憾*/
+  /*1=c罗 2=梅西 3=阿尔扎 4=姆巴佩 5=内马尔 6=遗憾 7=纳瓦斯 8=马塞洛 9=哈尔多松 10=拉莫斯*/
   export default {
     data(){
       return {
         player_url:'',
         user_name:'',
-        player_name:''
+        player_name:'',
+        player_url_arr:[
+          {
+            id:1,
+            name:'C罗',
+            url:'/static/imgs/result/C罗@2x.png'
+          },
+          {
+            id:2,
+            name:'梅西',
+            url:'/static/imgs/result/ms3@2x.png'
+          },
+          {
+            id:3,
+            name:'阿扎尔',
+            url:'/static/imgs/result/阿扎尔@2x.png'
+          },
+          {
+            id:4,
+            name:'姆巴佩',
+            url:'/static/imgs/result/mbp@2x.png'
+          },
+          {
+            id:5,
+            name:'内马尔',
+            url:'/static/imgs/result/nme@2x.png'
+          },
+          {
+            id:6,
+            name:'遗憾',
+            url:''
+          },
+          {
+            id:7,
+            name:'纳瓦斯',
+            url:'/static/imgs/result/nws@2x.png'
+          },
+          {
+            id:8,
+            name:'马塞洛',
+            url:'/static/imgs/result/马塞洛@2x.png'
+          },
+          {
+            id:9,
+            name:'哈尔多松',
+            url:'/static/imgs/result/hrds.png'
+          },
+          {
+            id:10,
+            name:'拉莫斯',
+            url:'/static/imgs/result/拉莫斯@2x.png'
+          }
+        ],
+        show_video:true
       }
     },
     methods:{
       init(){
+        setTimeout(()=>{
+          this.show_video=false
+        },4652)
         let obj=this.$route.query
         let arr=[obj.type,obj.question1,obj.question2,obj.question3]
-        let player=this.handlerAnswer(arr)
-        console.log(player)
-        alert(player)
+        let player_index=this.handlerAnswer(arr)
         //根据答案判断是哪位球星
-          this.player_url='/static/imgs/result/C罗@2x.png'
-          this.player_name='C罗'
+          this.player_url=this.player_url_arr[player_index-1].url
+          this.player_name=this.player_url_arr[player_index-1].name
            this.user_name=this.$route.query.user_name
       },
       reStart(){
@@ -64,7 +118,7 @@
 
                 if(a[0]==1 && a[1]=='A' && a[2]=='A' && a[3]=='A'){
                   /*失败*/
-                  return 11
+                  return 6
                 }else if(a[0]==1 && a[1]=='A' && a[2]=='A' && a[3]=='B'){
                   /*C罗*/
                   return 1
@@ -91,7 +145,7 @@
                   return 3
                 }else if(a[0]==1 && a[1]=='B' && a[2]=='A' && a[3]=='A'){
                   /*pity*/
-                  return 11
+                  return 6
                 }else if(a[0]==1 && a[1]=='B' && a[2]=='A' && a[3]=='B'){
                   /*梅西*/
                   return 2
@@ -118,10 +172,10 @@
                   return 5
                 }else if(a[0]==1 && a[1]=='C' && a[2]=='A' && a[3]=='A'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==1 && a[1]=='C' && a[2]=='A' && a[3]=='B'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==1 && a[1]=='C' && a[2]=='A' && a[3]=='C'){
                   /*阿尔扎*/
                   return 3
@@ -136,7 +190,7 @@
                   return 3
                 }else if(a[0]==1 && a[1]=='C' && a[2]=='C' && a[3]=='A'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==1 && a[1]=='C' && a[2]=='C' && a[3]=='B'){
                   /*梅西*/
                   return 2
@@ -172,10 +226,10 @@
                   return 8
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='A' && a[3]=='A'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='A' && a[3]=='B'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='A' && a[3]=='C'){
                   /*马塞洛*/
                   return 8
@@ -184,22 +238,22 @@
                   return 9
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='B' && a[3]=='B'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='B' && a[3]=='C'){
                   /*哈尔多松*/
                   return 9
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='C' && a[3]=='A'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='C' && a[3]=='B'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='B' && a[2]=='C' && a[3]=='C'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='C' && a[2]=='A' && a[3]=='A'){
                   /*PITY*/
-                  return 11
+                  return 6
                 }else if(a[0]==2 && a[1]=='C' && a[2]=='A' && a[3]=='B'){
                   /*拉莫斯*/
                   return 10
@@ -328,7 +382,10 @@
             left:-40px;
           }
         }
-
+        .video{
+          width: 100%;
+          height: 100%;
+        }
 
       }
 </style>
