@@ -116,7 +116,6 @@ import {mapState,mapActions} from 'vuex'
             this.$refs.video_bgm.play()
 
             setTimeout(() => {
-              window.bgMusic.play()
               this.$router.push({
                 name: 'Result',
                 query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {

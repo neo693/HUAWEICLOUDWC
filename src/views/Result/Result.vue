@@ -42,6 +42,8 @@
 </template>
 <script>
   /*1=c罗 2=梅西 3=阿尔扎 4=姆巴佩 5=内马尔 6=遗憾 7=纳瓦斯 8=马塞洛 9=哈尔多松 10=拉莫斯*/
+  import {mapState,mapActions} from 'vuex'
+
   export default {
     data(){
       return {
@@ -105,6 +107,7 @@
       }
     },
     methods:{
+      ...mapActions('common',['palyMusic','pauseMusic']),
       init(){
         // this.$refs.video_bgm.play()
         setTimeout(()=>{
@@ -309,6 +312,12 @@
     },
     mounted(){
       this.init()
+
+      if(this.show_bg_music){
+        this.palyMusic()
+      } else {
+        this.pauseMusic()
+      }
 
     }
 
