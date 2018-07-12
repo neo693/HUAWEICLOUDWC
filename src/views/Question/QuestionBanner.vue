@@ -37,7 +37,7 @@
         // 设计给的图错的,位置不对,,做下修正
         cuowudetu() {
           let flag = false
-          if (this.$route.query == 2) {
+          if (this.$route.query.type == 2) {
             if (this.$route.query.question1&&!this.$route.query.question2&&this.selected == 'A') {
               flag = true
             }
