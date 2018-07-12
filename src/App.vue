@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <router-view :key="key"/>
-    <img src="/static/imgs/result/音乐@2x.png" class="music-btn" v-if="show_bg_music" @click="pauseMusic">
-     <img src="/static/imgs/result/禁止播放态@2x.png" class="music-btn" v-else @click="palyMusic">
+    <img src="/static/imgs/result/音乐@2x.png" class="music-btn" v-if="show_bg_music" @click="pause">
+     <img src="/static/imgs/result/禁止播放态@2x.png" class="music-btn" v-else @click="paly">
   </div>
 </template>
 
@@ -17,12 +17,21 @@ export default {
   },
   methods:{
     ...mapActions('common',['palyMusic','pauseMusic']),
+    pause(){
+      this.pauseMusic()
+    },
+    paly(){
+      this.palyMusic
+    }
   },
   computed:{
     ...mapState('common',['show_bg_music']),
     key:function() {
       return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
     }
+  },
+  mounted(){
+    console.log(this.show_bg_music,'ee')
   }
 }
 </script>

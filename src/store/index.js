@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 
 let store = new Vuex.Store({
-   strict: process.env.NODE_ENV !== 'production',
+   //strict: process.env.NODE_ENV !== 'production',
   modules: {
     common
   },
