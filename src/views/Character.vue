@@ -111,7 +111,7 @@
             setTimeout(()=>{
               this.$refs.video_bgm.pause()
               this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:1}})
-            },4000)
+            },5000)
           }else if(this.params.type==2 && this.params.user_name!==''){
             document.getElementById('audio').pause()
             this.$refs.video_bgm.play()
@@ -119,7 +119,7 @@
             setTimeout(()=>{
               this.$refs.video_bgm.pause()
               this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:2}})
-            },4000)
+            },5000)
           }else{
             this.show_toast=true
             setTimeout(()=>{
