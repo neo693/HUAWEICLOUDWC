@@ -317,6 +317,7 @@ import {mapState,mapActions} from 'vuex'
     width:100%;
     height: 100%;
     background: url('/static/imgs/line1@2x.png') no-repeat center -58px;
+    background-size: 136%;
     position: relative;
   }
   .question-ball {

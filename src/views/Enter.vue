@@ -141,8 +141,9 @@ import {mapState,mapActions} from 'vuex'
   .enter{
     width:100%;
     height: 100%;
-    background: url('/static/imgs/line2@2x.png') no-repeat center 154px;
+    background: url('/static/imgs/line2@2x.png') no-repeat center 130px;
     position: relative;
+    background-size: 145%;
     overflow: hidden;
     .title{
       display: block;

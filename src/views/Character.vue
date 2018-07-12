@@ -143,7 +143,8 @@
     .choose-character{
       width: 100%;
       height: 100%;
-      background: url('/static/imgs/character/dir-line@2x.png') no-repeat center 74px;
+      background: url('/static/imgs/character/dir-line@2x.png') no-repeat center 80px;
+      background-size: 146%;
       .your-name{
         width: 375px;
         height: 59px;

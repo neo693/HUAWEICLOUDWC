@@ -233,8 +233,9 @@
 </script>
 <style lang="scss" scoped>
     .loading{
-      background: url('/static/imgs/line1@2x.png') no-repeat  center 0;
+      background: url('/static/imgs/line1@2x.png') no-repeat  center -58px;
       position: relative;
+      background-size: 136%;
       width: 100%;
       height: 100%;
       .ball{

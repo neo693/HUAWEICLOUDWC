@@ -319,7 +319,8 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background: url('/static/imgs/result/氛围@2x.png') no-repeat center 127px;
+        background: url('/static/imgs/result/氛围@2x.png') no-repeat center 127px, url("/static/imgs/result/背景@2x.png") no-repeat center -540px;
+        background-size: 136%, 400%;
         position: relative;
         .wrapper{
           width: 375px;
