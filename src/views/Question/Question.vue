@@ -40,7 +40,8 @@ import {mapState,mapActions} from 'vuex'
     data() {
       return {
         selected: false,
-        show_video:false
+        show_video:false,
+        beishu: 1,
       }
     },
     methods: {
@@ -146,8 +147,8 @@ import {mapState,mapActions} from 'vuex'
         timeline1
           .add({
             targets: '.F1',
-            translateX: [-100, -150],
-            translateY: [0, 300],
+            translateX: [-100*this.beishu, -150*this.beishu],
+            translateY: [0, 300*this.beishu],
             opacity: 0,
             rotate: '0.1turn',
             scale: 0.6,
@@ -156,8 +157,8 @@ import {mapState,mapActions} from 'vuex'
           })
           .add({
             targets: '.F3',
-            translateX: [0, -200],
-            translateY: [0, -600],
+            translateX: [0, -200*this.beishu],
+            translateY: [0, -600*this.beishu],
             opacity: 0,
             rotate: '0.1turn',
             scale: 0.6,
@@ -166,8 +167,8 @@ import {mapState,mapActions} from 'vuex'
           })
           .add({
             targets: '.F4',
-            translateX: [0, 600],
-            translateY: [0, 80],
+            translateX: [0, 600*this.beishu],
+            translateY: [0, 80*this.beishu],
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
@@ -175,8 +176,8 @@ import {mapState,mapActions} from 'vuex'
           })
           .add({
             targets: '.F5',
-            translateX: [0, -600],
-            translateY: [0, 120],
+            translateX: [0, -600*this.beishu],
+            translateY: [0, 120*this.beishu],
             opacity: 0,
             scale: 0.9,
             easing: 'linear',
@@ -184,8 +185,8 @@ import {mapState,mapActions} from 'vuex'
           })
           .add({
             targets: '.F6',
-            translateX: [0, 600],
-            translateY: [0, -60],
+            translateX: [0, 600*this.beishu],
+            translateY: [0, -60*this.beishu],
             opacity: 0,
             scale: 1.2,
             rotate: '-0.1turn',
@@ -194,8 +195,8 @@ import {mapState,mapActions} from 'vuex'
           })
           .add({
             targets: '.F7',
-            translateX: [0, -300],
-            translateY: [0, -300],
+            translateX: [0, -300*this.beishu],
+            translateY: [0, -300*this.beishu],
             opacity: 0,
             rotate: '-0.1turn',
             easing: 'linear',
@@ -214,8 +215,8 @@ import {mapState,mapActions} from 'vuex'
         timeline2
           .add({
             targets: '.G1',
-            translateX: [0, -60, 0],
-            translateY: [0, -800],
+            translateX: [0, -60*this.beishu, 0],
+            translateY: [0, -800*this.beishu],
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
@@ -223,40 +224,40 @@ import {mapState,mapActions} from 'vuex'
           })
           .add({
             targets: '.G3',
-            translateX: [0, -700],
-            translateY: [0, 270],
+            translateX: [0, -700*this.beishu],
+            translateY: [0, 270*this.beishu],
             opacity: 0,
             easing: 'linear',
             duration: 1000
           })
           .add({
             targets: '.G4',
-            translateX: [0, 600],
-            translateY: [0, 200],
+            translateX: [0, 600*this.beishu],
+            translateY: [0, 200*this.beishu],
             opacity: 0,
             easing: 'linear',
             duration: 800
           })
           .add({
             targets: '.G5',
-            translateX: [0, -600],
-            translateY: [0, -50],
+            translateX: [0, -600*this.beishu],
+            translateY: [0, -50*this.beishu],
             opacity: 0,
             easing: 'linear',
             duration: 800
           })
           .add({
             targets: '.G6',
-            translateX: [0, 600],
-            translateY: [0, -150],
+            translateX: [0, 600*this.beishu],
+            translateY: [0, -150*this.beishu],
             opacity: 0,
             easing: 'linear',
             duration: 800
           })
           .add({
             targets: '.G7',
-            translateX: [0, -600],
-            translateY: [0, -50],
+            translateX: [0, -600*this.beishu],
+            translateY: [0, -50*this.beishu],
             opacity: 0,
             easing: 'linear',
             duration: 800
@@ -272,6 +273,8 @@ import {mapState,mapActions} from 'vuex'
       this.registerSound()
     },
     mounted() {
+      // 计算网页缩放的基数
+      this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
       // 防守类球轨迹
       try {
         document.querySelectorAll('.FG').forEach(ele => {

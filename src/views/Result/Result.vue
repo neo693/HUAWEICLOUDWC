@@ -30,6 +30,12 @@
       <img src="/static/imgs/result/不服再战@2x.png" class="btn-l" @click="reStart">
       <img src="/static/imgs/result/精准预测@2x.png" class="btn-r" @click="go">
       <img :src="player_url" class="player">
+      <div v-if="ewmShow" class="ewm-wrap">
+        <div>
+          <img src="/static/imgs/result/ewm.png" class="ewm" alt="">
+          <img src="/static/imgs/result/close.png" class="close" alt="" @click="ewmShow=false">
+        </div>
+      </div>
     </div>
     <!--<audio src="/static/video/高清射门.ogg" id="video_bgm" ref="video_bgm" autoplay></audio>-->
   </div>
@@ -94,7 +100,8 @@
             url:'/static/imgs/result/拉莫斯@2x.png'
           }
         ],
-        show_video:false
+        show_video:false,
+        ewmShow: false,
       }
     },
     methods:{
@@ -114,14 +121,15 @@
          }else{
           //失败的情况写这里
          }
-          
+
       },
       reStart(){
         this.$router.push({name:'Enter'})
       },
       go(){
         // 跳转华为链接
-
+        // 打开二维码
+        this.ewmShow = true
       },
       savePic(){
         // 保存图片
@@ -312,6 +320,7 @@
         height: 100%;
         overflow: hidden;
         background: url('/static/imgs/result/氛围@2x.png') no-repeat center 127px;
+        position: relative;
         .wrapper{
           width: 375px;
           height: 100%;
@@ -372,7 +381,7 @@
           .save{
             z-index: 2;
             position: absolute;
-            top:437px;
+            bottom: 72px;
             left:323px;
             width: 30px;
             height: 101px;
@@ -403,6 +412,33 @@
         .video{
           width: 100%;
           height: 100%;
+        }
+        .ewm-wrap {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.57);
+          z-index: 99;
+          > div {
+            width: 168px;
+            height: 179px;
+            position: absolute;
+            bottom: 82px;
+            left: 114px;
+            .ewm {
+              width: 100%;
+              height: 100%;
+            }
+            .close {
+              width: 26px;
+              height: 26px;
+              position: absolute;
+              right: 0;
+              top: 0;
+            }
+          }
         }
 
       }

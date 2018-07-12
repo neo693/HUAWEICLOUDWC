@@ -15,7 +15,8 @@
     props: ['selected'],
     data() {
       return {
-        loaded: false
+        loaded: false,
+        beishu: 1,
       }
     },
     computed: {
@@ -39,21 +40,21 @@
         this.loaded = false
         anime({
           targets: '.imgSrcA',
-          translateX: [-600, 0],
-          translateY: [-100, 0],
+          translateX: [-600*this.beishu, 0],
+          translateY: [-100*this.beishu, 0],
           easing: 'linear',
           duration: 800
         })
         anime({
           targets: '.imgSrcB',
-          translateX: [600, 0],
-          translateY: [-100, 0],
+          translateX: [600*this.beishu, 0],
+          translateY: [-100*this.beishu, 0],
           easing: 'linear',
           duration: 800
         })
         anime({
           targets: '.imgSrcC',
-          translateY: [600, 0],
+          translateY: [600*this.beishu, 0],
           easing: 'linear',
           duration: 800
         }).finished.then(() => {
@@ -63,6 +64,8 @@
       }
     },
     mounted() {
+      // 计算网页缩放的基数
+      this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
       this.Animate()
     },
     watch: {
