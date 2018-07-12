@@ -152,7 +152,7 @@ import {mapState,mapActions} from 'vuex'
             rotate: '0.1turn',
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F3',
@@ -162,7 +162,7 @@ import {mapState,mapActions} from 'vuex'
             rotate: '0.1turn',
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F4',
@@ -171,7 +171,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F5',
@@ -180,7 +180,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             scale: 0.9,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F6',
@@ -190,7 +190,7 @@ import {mapState,mapActions} from 'vuex'
             scale: 1.2,
             rotate: '-0.1turn',
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F7',
@@ -199,7 +199,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             rotate: '-0.1turn',
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .finished
           .then(() => {
@@ -219,7 +219,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G3',
@@ -227,7 +227,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, 270*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 1000
+            duration: 750
           })
           .add({
             targets: '.G4',
@@ -235,7 +235,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, 200*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G5',
@@ -243,7 +243,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, -50*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G6',
@@ -251,7 +251,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, -150*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G7',
@@ -259,7 +259,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, -50*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .finished
           .then(() => {
