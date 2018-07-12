@@ -40,8 +40,6 @@
     data() {
       return {
         selected: false,
-        // 开场动画
-        begin: false,
         show_video:false
       }
     },
@@ -80,7 +78,9 @@
         createjs.Sound.registerSounds(sounds, assetPath)
       },
       select(answer) {
-        if (!this.begin) return
+        window.timeline1 && window.timeline1.pause()
+        window.timeline2 && window.timeline2.pause()
+        this.hide()
         this.selected = answer
 
         // 播放声音
@@ -126,10 +126,23 @@
           }
         })
       },
+      // 动画暂停后隐藏元素
+      hide() {
+        try {
+          document.querySelectorAll('.FG').forEach(ele => {
+            ele.removeAttribute('style')
+          })
+        }
+        catch(err) {
+          console.log(err)
+        }
+      },
       // 防守类的球轨迹
       FSAnimate() {
-        var timeline = anime.timeline()
-        timeline
+        window.timeline1 = anime.timeline({
+          loop: true
+        })
+        timeline1
           .add({
             targets: '.F1',
             translateX: [-100, -150],
@@ -138,7 +151,7 @@
             rotate: '0.1turn',
             scale: 0.6,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.F3',
@@ -148,7 +161,7 @@
             rotate: '0.1turn',
             scale: 0.6,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.F4',
@@ -157,7 +170,7 @@
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.F5',
@@ -166,7 +179,7 @@
             opacity: 0,
             scale: 0.9,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.F6',
@@ -176,7 +189,7 @@
             scale: 1.2,
             rotate: '-0.1turn',
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.F7',
@@ -185,18 +198,19 @@
             opacity: 0,
             rotate: '-0.1turn',
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .finished
           .then(() => {
             console.log('防守动画完了')
-            this.begin = true
           })
       },
       // 防守类的球轨迹
       JGAnimate() {
-        var timeline = anime.timeline()
-        timeline
+        window.timeline2 = anime.timeline({
+          loop: true
+        })
+        timeline2
           .add({
             targets: '.G1',
             translateX: [0, -60, 0],
@@ -204,7 +218,7 @@
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.G3',
@@ -212,7 +226,7 @@
             translateY: [0, 270],
             opacity: 0,
             easing: 'linear',
-            duration: 500
+            duration: 1000
           })
           .add({
             targets: '.G4',
@@ -220,7 +234,7 @@
             translateY: [0, 200],
             opacity: 0,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.G5',
@@ -228,7 +242,7 @@
             translateY: [0, -50],
             opacity: 0,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.G6',
@@ -236,7 +250,7 @@
             translateY: [0, -150],
             opacity: 0,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .add({
             targets: '.G7',
@@ -244,12 +258,11 @@
             translateY: [0, -50],
             opacity: 0,
             easing: 'linear',
-            duration: 400
+            duration: 800
           })
           .finished
           .then(() => {
             console.log('防守动画完了')
-            this.begin = true
           })
       },
 
@@ -259,9 +272,14 @@
     },
     mounted() {
       // 防守类球轨迹
-      document.querySelectorAll('.FG').forEach(ele => {
-        ele.removeAttribute('style')
-      })
+      try {
+        document.querySelectorAll('.FG').forEach(ele => {
+          ele.removeAttribute('style')
+        })
+      }
+      catch(err) {
+        console.log(err)
+      }
       if (this.$route.query.type == 1) {
         this.JGAnimate()
       } else {
@@ -273,9 +291,11 @@
     },
     watch: {
       '$route'() {
-        document.querySelectorAll('.FG').forEach(ele => {
-          ele.removeAttribute('style')
-        })
+        try {
+          document.querySelectorAll('.FG').forEach(ele => {
+            ele.style.opacity = 1
+          })
+        } catch(err) {}
         // 防守类球轨迹
         if (this.$route.query.type == 1) {
           this.JGAnimate()
