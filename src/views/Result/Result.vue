@@ -106,6 +106,9 @@
         ewmShow: false,
       }
     },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+    },
     methods:{
       ...mapActions('common',['palyMusic','pauseMusic']),
       init(){
