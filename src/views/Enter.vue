@@ -108,6 +108,7 @@
       },
     },
     mounted(){
+      document.getElementById('audio').play()
       this.animate()
       let time1=this.time_dur*3+this.time_delay*3
       let time2=this.time_dur*2+this.time_delay*2
