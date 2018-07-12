@@ -33,7 +33,7 @@
   import QuestionBanner from './QuestionBanner'
   import QuestionTitle from './QuestionTitle'
   import QuestionFooter from './QuestionFooter'
-
+import {mapState,mapActions} from 'vuex'
   export default {
     name: "Question",
     components: { QuestionBanner, QuestionTitle, QuestionFooter },
@@ -44,6 +44,7 @@
       }
     },
     methods: {
+       ...mapActions('common',['palyMusic','pauseMusic']),
       registerSound() {
         // 注册声音
         createjs.Sound.alternateExtensions = ["mp3"];
@@ -88,7 +89,7 @@
         let soundID = `${this.$route.query.type == 1 ? 'G' : 'F'}${this.$route.name.slice(-1)}${this.selected}`
         createjs.Sound.play(soundID).on('complete', () => {
           console.log('配音播放结束')
-          document.getElementById('audio').volume=1
+          document.getElementById('audio').volume=0.3
           // 进入下一页
           // 如果是问题1或者2就进入下一个问题
           // 首先得播放动画再进入下一页
@@ -287,7 +288,8 @@
       }
 
       //window.bgMusic.volume = 0.2
-      window.bgMusic.play()
+      //window.bgMusic.play()
+      this.palyMusic()
     },
     watch: {
       '$route'() {

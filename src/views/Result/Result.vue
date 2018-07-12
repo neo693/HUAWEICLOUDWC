@@ -99,9 +99,6 @@
     },
     methods:{
       init(){
-
-
-
         // this.$refs.video_bgm.play()
         setTimeout(()=>{
           this.show_video=false
@@ -110,9 +107,14 @@
         let arr=[obj.type,obj.question1,obj.question2,obj.question3]
         let player_index=this.handlerAnswer(arr)
         //根据答案判断是哪位球星
-          this.player_url=this.player_url_arr[player_index-1].url
-          this.player_name=this.player_url_arr[player_index-1].name
-           this.user_name=this.$route.query.user_name
+         if(this.player_index!=6){
+            this.player_url=this.player_url_arr[player_index-1].url
+            this.player_name=this.player_url_arr[player_index-1].name
+            this.user_name=this.$route.query.user_name
+         }else{
+          //失败的情况写这里
+         }
+          
       },
       reStart(){
         this.$router.push({name:'Enter'})

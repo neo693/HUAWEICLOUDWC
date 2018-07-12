@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+import {mapState,mapActions} from 'vuex'
   export default {
     data(){
       return {
@@ -32,6 +33,7 @@
       }
     },
     methods:{
+      ...mapActions('common',['palyMusic','pauseMusic']),
       start(){
         this.$router.push({name:'Character'})
       },
@@ -123,7 +125,7 @@
       },
     },
     mounted(){
-      document.getElementById('audio').play()
+      this.palyMusic()
       this.animate()
 
       setTimeout(() => {

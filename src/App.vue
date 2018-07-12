@@ -7,26 +7,19 @@
 </template>
 
 <script>
+import {mapState,mapActions} from 'vuex'
 export default {
   name: 'App',
   data(){
     return {
-        show_bg_music:true
+        
     }
   },
   methods:{
-    palyMusic(){
-
-       document.getElementById('audio').play()
-       this.show_bg_music=true
-    },
-    pauseMusic(){
-
-       document.getElementById('audio').pause()
-       this.show_bg_music=false
-    }
+    ...mapActions('common',['palyMusic','pauseMusic']),
   },
   computed:{
+    ...mapState('common',['show_bg_music']),
     key:function() {
       return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
     }

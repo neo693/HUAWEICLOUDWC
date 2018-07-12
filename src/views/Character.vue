@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    import {mapState,mapActions} from 'vuex'
     export default {
       name: "Character",
       data(){
@@ -51,6 +52,7 @@
           }
       },
       methods:{
+        ...mapActions('common',['palyMusic','pauseMusic']),
         animate(){
           let that=this
           this.ball=anime({
@@ -125,6 +127,9 @@
             },2000)
           }
         }
+      },
+      computed:{
+         
       },
       mounted(){
         this.animate()
