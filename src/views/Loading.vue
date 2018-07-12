@@ -69,7 +69,7 @@
 {'src':'/static/imgs/Question2/Question2.png','id':49},
 {'src':'/static/imgs/Question2/Question3.png','id':50},
 {'src':'/static/video/video1.gif','id':51},
-{'src':'/static/video/video2.gif','id':52},
+{'src':'/static/imgs/guiji/F1.png','id':52},
 {'src':'/static/audio/F1A.mp3','id':53},
 {'src':'/static/audio/F1B.mp3','id':54},
 {'src':'/static/audio/F1C.mp3','id':55},
@@ -188,6 +188,19 @@
           {'src':'/static/video/足球准备.mp3','id':168},
           {'src':'/static/video/高清射门.MP3','id':169},
           {'src':'/static/video/shemen.MP3','id':170},
+          {'src':'/static/imgs/guiji/F2.png','id':171},
+          {'src':'/static/imgs/guiji/F3.png','id':172},
+          {'src':'/static/imgs/guiji/F4.png','id':173},
+          {'src':'/static/imgs/guiji/F5.png','id':174},
+          {'src':'/static/imgs/guiji/F6.png','id':175},
+          {'src':'/static/imgs/guiji/F7.png','id':176},
+          {'src':'/static/imgs/guiji/G1.png','id':177},
+          {'src':'/static/imgs/guiji/G2.png','id':178},
+          {'src':'/static/imgs/guiji/G3.png','id':179},
+          {'src':'/static/imgs/guiji/G4.png','id':180},
+          {'src':'/static/imgs/guiji/G5.png','id':181},
+          {'src':'/static/imgs/guiji/G6.png','id':182},
+          {'src':'/static/imgs/guiji/G7.png','id':183},
         ],
         progress:[],
         bar_width:0
@@ -232,7 +245,7 @@
          left:0;
          right:0;
          top:185px;
-        animation: rotate 0.5s linear infinite;
+        animation: rotate 1s linear infinite;
         transform-origin: 50% 50%;
       }
       @keyframes rotate{from{transform: rotate(0deg)}

@@ -1,6 +1,6 @@
 <template>
   <div class="title-wrap">
-    <img :src="imgSrc" alt="">
+    <img :src="imgSrc" alt="" :class="{teshu: $route.query.type==2&&!$route.query.question1}">
   </div>
 </template>
 
@@ -46,10 +46,16 @@
 <style lang="scss" scoped>
   .title-wrap {
     width: 100%;
-    height: 104px;
     display: flex;
     justify-content: center;
     position: fixed;
     bottom: 212px;
+    img {
+      width: 303px;
+      height: 104px;
+      &.teshu {
+        width: 335px;
+      }
+    }
   }
 </style>
