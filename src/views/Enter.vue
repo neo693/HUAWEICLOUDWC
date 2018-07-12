@@ -21,7 +21,6 @@ import {mapState,mapActions} from 'vuex'
         show_head_ball:true,
         show_gate:true,
         show_hit:true,
-        music_url:'/static/imgs/打开声音@2x.png',
         time_dur:1500,
         time_delay:600,
         ball1:'',
@@ -35,6 +34,13 @@ import {mapState,mapActions} from 'vuex'
     },
     computed:{
       ...mapState('common',['show_bg_music']),
+      music_url() {
+        if (!this.show_bg_music) {
+          return '/static/imgs/enter/框@2x.png'
+        } else {
+          return '/static/imgs/打开声音@2x.png'
+        }
+      }
     },
     methods:{
       ...mapActions('common',['palyMusic','pauseMusic']),
@@ -120,11 +126,9 @@ import {mapState,mapActions} from 'vuex'
       },
       switchMusic(){
         if(this.music_url=='/static/imgs/打开声音@2x.png'){
-          this.music_url='/static/imgs/enter/框@2x.png'
-          document.getElementById('audio').pause()
+          this.pauseMusic()
         }else if(this.music_url=='/static/imgs/enter/框@2x.png'){
-          this.music_url='/static/imgs/打开声音@2x.png'
-          document.getElementById('audio').play()
+          this.palyMusic()
         }
       },
     },
