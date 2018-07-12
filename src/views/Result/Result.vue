@@ -79,7 +79,7 @@
           {
             id:6,
             name:'遗憾',
-            url:''
+            url:'/static/imgs/result/nojieguo.png'
           },
           {
             id:7,

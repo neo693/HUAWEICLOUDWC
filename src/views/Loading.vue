@@ -202,6 +202,7 @@
           {'src':'/static/imgs/guiji/G6.png','id':182},
           {'src':'/static/imgs/guiji/G7.png','id':183},
           {'src':'/static/FZLTHJW.TTF','id':184},
+          {'src':'/static/imgs/result/nojieguo.png','id':185},
         ],
         progress:[],
         bar_width:0
