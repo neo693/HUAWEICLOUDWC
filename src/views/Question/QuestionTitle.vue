@@ -50,6 +50,7 @@
     justify-content: center;
     position: fixed;
     bottom: 212px;
+    z-index: 2;
     img {
       width: 303px;
       height: 104px;

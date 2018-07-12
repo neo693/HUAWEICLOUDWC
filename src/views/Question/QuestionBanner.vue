@@ -1,10 +1,10 @@
 <template>
   <div v-show="showBanner">
     <!--不管三七二十一，上来就是四张图，够了-->
-    <img :src="ImgSrc1" alt="" class="banner1img">
-    <img :src="ImgSrc2" alt="" class="banner2img">
-    <img :src="ImgSrc3" alt="" class="banner3img">
-    <img :src="ImgSrc4" alt="" class="banner4img">
+    <img :src="ImgSrc1" alt="" class="banner1img" :class="{cuowudetu}">
+    <img :src="ImgSrc2" alt="" class="banner2img" :class="{cuowudetu}">
+    <img :src="ImgSrc3" alt="" class="banner3img" :class="{cuowudetu}">
+    <img :src="ImgSrc4" alt="" class="banner4img" :class="{cuowudetu}">
   </div>
 </template>
 
@@ -33,6 +33,19 @@
         ImgSrc4() {
           if (!this.selected) return ''
           return `/static/imgs/QuestionBanner${this.$route.query.type}/${this.$route.name.slice(-1)}-${this.selected}4.png`
+        },
+        // 设计给的图错的,位置不对,,做下修正
+        cuowudetu() {
+          let flag = false
+          if (this.$route.query == 2) {
+            if (this.$route.query.question1&&!this.$route.query.question2&&this.selected == 'A') {
+              flag = true
+            }
+            if (this.$route.query.question1 && this.$route.query.question2 && this.selected == 'A') {
+              flag = true
+            }
+          }
+          return flag
         }
       },
       methods: {
@@ -329,5 +342,8 @@
     position: absolute;
     top: -58px;
     z-index: 1;
+    &.cuowudetu {
+      top: 0;
+    }
   }
 </style>

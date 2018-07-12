@@ -372,7 +372,7 @@
           .save{
             z-index: 2;
             position: absolute;
-            top:437px;
+            bottom: 14px;
             left:323px;
             width: 30px;
             height: 101px;

@@ -297,8 +297,8 @@
       .toast{
         position:absolute;
         bottom:70px;
-        width: 200px;
-        height: 75px;
+        width: 239px;
+        height: 67px;
         margin: auto;
         left:0;
         right: 0;
