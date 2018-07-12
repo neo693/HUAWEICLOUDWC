@@ -30,7 +30,6 @@ import {mapState,mapActions} from 'vuex'
         timer1:'',
         timer2:'',
         timer3:'',
-        beishu: 1,
       }
     },
     methods:{
@@ -45,22 +44,22 @@ import {mapState,mapActions} from 'vuex'
         manTimeline
           .add({
             targets: '.man2',
-            translateX:[0,-400*this.beishu, -400*this.beishu],
-            translateY: [0,-630*this.beishu, -630*this.beishu],
+            translateX:[0,-400, -400],
+            translateY: [0,-230, -230],
             duration: this.time_dur,
             easing: 'linear'
           })
           .add({
             targets: '.gate',
-            translateX:[0,375*this.beishu,375*this.beishu],
-            translateY:[0,60*this.beishu,60*this.beishu],
+            translateX:[0,375,375],
+            translateY:[0,60,60],
             duration: this.time_dur,
             easing: 'linear'
           })
           .add({
             targets: '.hit',
-            translateX:[0,-360*this.beishu,-360*this.beishu],
-            translateY: [0,-750*this.beishu,-750*this.beishu],
+            translateX:[0,-360,-360],
+            translateY: [0,-400,-400],
             duration: this.time_dur,
             easing: 'linear'
           })
@@ -71,16 +70,16 @@ import {mapState,mapActions} from 'vuex'
         ballTimeline
           .add({
             targets: '.ball1',
-            translateX:[0,130*this.beishu,130*this.beishu],
-            translateY: [0,-100*this.beishu,-100*this.beishu],
+            translateX:[0,130,130],
+            translateY: [0,-100,-100],
             duration: this.time_dur,
             rotate:'3turn',
             easing: 'linear'
           })
           .add({
             targets: '.ball2',
-            translateX:[0,-350*this.beishu,-350*this.beishu],
-            translateY: [0,100*this.beishu,100*this.beishu],
+            translateX:[0,-350,-350],
+            translateY: [0,100,100],
             duration: this.time_dur,
             rotate:'3turn',
             easing: 'linear',
@@ -125,10 +124,13 @@ import {mapState,mapActions} from 'vuex'
         }
       },
     },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+    },
     mounted(){
-      this.palyMusic()
-      // 计算网页缩放的基数
-      this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
+      if(this.show_bg_music){
+          this.palyMusic()
+      }
       this.animate()
 
       setTimeout(() => {
@@ -189,7 +191,7 @@ import {mapState,mapActions} from 'vuex'
       display: block;
       width: 375px;
       right:-400px;
-      top: 600px;
+      bottom: -200px;
       margin: auto;
     }
     .ball1{
@@ -212,7 +214,7 @@ import {mapState,mapActions} from 'vuex'
       display: block;
       width: 375px;
       right:-325px;
-      top: 800px;
+      bottom: -452px;
       margin: auto;
     }
     .ball2{

@@ -269,6 +269,9 @@ import {mapState,mapActions} from 'vuex'
       },
 
     },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+    },
     created() {
       this.registerSound()
     },
@@ -292,7 +295,10 @@ import {mapState,mapActions} from 'vuex'
 
       //window.bgMusic.volume = 0.2
       //window.bgMusic.play()
-      this.palyMusic()
+
+     if(this.show_bg_music){
+          this.palyMusic()
+      }
     },
     watch: {
       '$route'() {
