@@ -272,6 +272,9 @@ import {mapState,mapActions} from 'vuex'
     created() {
       this.registerSound()
     },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+    },
     mounted() {
       // 计算网页缩放的基数
       this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
@@ -292,7 +295,10 @@ import {mapState,mapActions} from 'vuex'
 
       //window.bgMusic.volume = 0.2
       //window.bgMusic.play()
-      this.palyMusic()
+
+      if(this.show_bg_music){
+        this.palyMusic()
+      }
     },
     watch: {
       '$route'() {

@@ -33,6 +33,9 @@ import {mapState,mapActions} from 'vuex'
         beishu: 1,
       }
     },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+    },
     methods:{
       ...mapActions('common',['palyMusic','pauseMusic']),
       start(){
@@ -134,6 +137,10 @@ import {mapState,mapActions} from 'vuex'
       setTimeout(() => {
         this.show_btn = true
       }, 3*this.time_dur)
+
+      if(this.show_bg_music){
+        this.palyMusic()
+      }
     }
   }
 </script>
