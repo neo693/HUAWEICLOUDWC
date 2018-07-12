@@ -12,7 +12,7 @@ let actions={
     document.getElementById('audio').play()
     commit(types.CHANGE_MUSIC_STATE,true)
  },
- pauseMusic(){
+ pauseMusic({commit,state},params){
     document.getElementById('audio').pause()
     commit(types.CHANGE_MUSIC_STATE,false)
  }

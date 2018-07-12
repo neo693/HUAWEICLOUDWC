@@ -9,14 +9,15 @@
     name: "QuestionTitle",
     data() {
       return {
-        animate: false
+        animate: false,
+        beishu: 1,
       }
     },
     methods: {
       play() {
         anime({
           targets: '.title-wrap',
-          translateX: [600, 0],
+          translateX: [600*this.beishu, 0],
           duration: 800,
           easing: 'linear'
         })
@@ -28,6 +29,8 @@
       }
     },
     mounted() {
+      // 计算网页缩放的基数
+      this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
       this.play()
     },
     watch: {

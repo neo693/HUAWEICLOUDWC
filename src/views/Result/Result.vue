@@ -100,7 +100,8 @@
             url:'/static/imgs/result/拉莫斯@2x.png'
           }
         ],
-        show_video:false
+        show_video:false,
+        ewmShow: false,
       }
     },
     methods:{
@@ -380,7 +381,7 @@
           .save{
             z-index: 2;
             position: absolute;
-            bottom: 14px;
+            bottom: 72px;
             left:323px;
             width: 30px;
             height: 101px;
@@ -419,9 +420,10 @@
           width: 100%;
           height: 100%;
           background: rgba(0, 0, 0, 0.57);
+          z-index: 99;
           > div {
-            width: 114px;
-            height: 168px;
+            width: 168px;
+            height: 179px;
             position: absolute;
             bottom: 82px;
             left: 114px;

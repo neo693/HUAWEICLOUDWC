@@ -48,17 +48,17 @@
             show_attack_video:false,
             show_defence_video:false,
              ball:'',
-            man:''
+            man:'',
+            beishu: 1,
           }
       },
       methods:{
         ...mapActions('common',['palyMusic','pauseMusic']),
         animate(){
-          let that=this
           this.ball=anime({
             targets: '.player-ball',
-            translateX:[80,0],
-            translateY: [80,0],
+            translateX:[80*this.beishu,0],
+            translateY: [80*this.beishu,0],
             duration: 1000,
             scale: [0.5,1],
             rotate:'3turn',
@@ -67,8 +67,8 @@
           })
           this.man=anime({
             targets: '.player-attack',
-            translateX:[275,0],
-            translateY: [467,0],
+            translateX:[275*this.beishu,0],
+            translateY: [467*this.beishu,0],
             duration: 1000,
             loop: false,
             easing: 'linear'
@@ -129,9 +129,11 @@
         }
       },
       computed:{
-         
+
       },
       mounted(){
+        // 计算网页缩放的基数
+        this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
         this.animate()
       }
     }
