@@ -121,7 +121,7 @@
                   [this.$route.name.toLowerCase()]: this.selected
                 })
               })
-            }, 4500)
+            }, 4000)
 
           }
         })
