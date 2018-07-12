@@ -28,12 +28,91 @@
         ball2:'',
         timer1:'',
         timer2:'',
-        timer3:''
+        timer3:'',
+      
       }
     },
     methods:{
       start(){
         this.$router.push({name:'Character'})
+      },
+      animate2(){
+        let that=this
+        this.ball1=anime({
+          targets: '.ball1',
+          translateX:[-200,0],
+          translateY: [-100,0],
+          duration: that.time_dur,
+          rotate:'3turn',
+          loop: false,
+          easing: 'linear',
+          autoplay:false
+        })
+         this.man2=anime({
+          targets: '.man2',
+          translateX:[275,0],
+          translateY: [467,0],
+          duration: that.time_dur,
+          loop: false,
+          easing: 'linear',
+          begin:(anim)=>{
+            if(anim){
+              this.ball1.play()
+            }
+          },
+          complete:(anim)=>{
+              if(anim){
+                 setTimeout(()=>{
+                       that.show_head_ball=false
+                       that.show_gate=true
+                          let man3=anime({
+                              targets: '.gate',
+                              translateX:[-375,0],
+                              duration: that.time_dur,
+                              loop: false,
+                              easing: 'linear',
+                              complete:(anim)=>{
+                                      if(anim){
+                                        setTimeout(()=>{
+                                          that.show_gate=false
+                                          that.show_hit = true
+                                            that.ball2=anime(
+                                                  {
+                                                        targets: '.ball2',
+                                                          translateX:[475,0],
+                                                        translateY: [50,0],
+                                                         duration: that.time_dur,
+                                                            rotate:'3turn',
+                                                           loop: false,
+                                                        easing: 'linear',
+                                                       }
+                                                   )
+                                                   let man1=anime({
+                                                           targets: '.hit',
+                                                         translateX:[275,0],
+                                                      translateY: [467,0],
+                                                            duration: that.time_dur,
+                                                                  loop: false,
+                                                            easing: 'linear',
+                                                            complete:(anim)=>{
+                                                                      if(anim){
+                                                                        setTimeout(()=>{
+                                                                          that.show_gate=false
+                                                                          that.show_hit=false
+                                                                          that.show_head_ball=true
+                                                                        },this.time_delay)
+                                                                      }
+                                                            }
+                                                     })      
+                                        },this.time_delay)
+                                      }
+                              }
+                          })
+                 },this.time_delay)
+              }
+          },
+          loop:true
+        })
       },
       animate(){
         let that=this
@@ -56,8 +135,8 @@
         })
         this.man2.finished.then(()=>{
           setTimeout(()=>{
-            this.show_head_ball=false
-            this.show_gate=true
+            that.show_head_ball=false
+            that.show_gate=true
             let man3=anime({
               targets: '.gate',
               translateX:[-375,0],
@@ -67,19 +146,9 @@
             })
             man3.finished.then(()=>{
               setTimeout(()=>{
-                this.show_gate=false
-                this.show_hit = true
-                this.ball2.restart()
-                let man1=anime({
-                  targets: '.hit',
-                  translateX:[275,0],
-                  translateY: [467,0],
-                  duration: that.time_dur,
-                  loop: false,
-                  easing: 'linear'
-                })
-          
-                 this.ball2=anime(
+                that.show_gate=false
+                that.show_hit = true
+                 that.ball2=anime(
                   {
                     targets: '.ball2',
                     translateX:[475,0],
@@ -88,11 +157,17 @@
                     rotate:'3turn',
                     loop: false,
                     easing: 'linear',
-            
                   }
                 )
-            
-                this.ball2.finished.then(()=>{
+                let man1=anime({
+                  targets: '.hit',
+                  translateX:[275,0],
+                  translateY: [467,0],
+                  duration: that.time_dur,
+                  loop: false,
+                  easing: 'linear'
+                })      
+                man1.finished.then(()=>{
                   setTimeout(()=>{
                     that.show_gate=false
                     that.show_hit=false
@@ -122,10 +197,10 @@
       let time1=this.time_dur*3+this.time_delay*3
       let time2=this.time_dur*2+this.time_delay*2
 
-       this.timer1=window.setInterval(()=>{
+       setInterval(()=>{
         this.ball1.restart()
         this.animate()
-        this.timer2=window.setTimeout(()=>{
+       setTimeout(()=>{
           this.ball2.restart()
         },time2)
       },time1)
@@ -134,8 +209,8 @@
       },time1)
     },
     beforeDestroy(){
-       window.clearInterval(this.timer1)
-       window.clearTimeout(this.timer2)
+      clearInterval()
+      clearTimeout()
     }
   }
 </script>
