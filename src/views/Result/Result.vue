@@ -3,38 +3,47 @@
     <div class="wrapper" v-show="!show_video">
       <div class="logo">
         <img src="/static/imgs/result/logo@2x.png" class="logo-img">
-        <span style="margin-left: 11px">
+        <span style="margin-left: 11px" class="logo-txt">
           华为云丨有技术 有未来 值得信赖
         </span>
       </div>
 
       <!-- <img src="/static/imgs/result/文案：C罗@2x.png" class="txt-wrapper"> -->
-      <div class="txt-wrapper">
+      <div class="txt-wrapper" v-show="!showPity">
         <div>
-          <b class="name" >{{user_name}}</b>
-        </div>
-        <div>
-          <b >
-            天哪!你的脚法已经和
-            <span class="player-name">
-            {{player_name}}
-          </span>
-            不相上下了！
-          </b>
-        </div>
+          <span class="name" >{{user_name}}</span>
 
+        </div>
+        <div>
+          <span v-show="!showPity">{{p_index==4?'太厉害了，简直就是':p_index==5?'太厉害了，都可以和':p_index==1 || p_index==2 || p_index==3?'天哪!你的脚法已经和':p_index==10 || p_index==8?'太厉害了，都可以和':p_index==9 || p_index==7?'太厉害了，简直就是':''}}<span class="player-name">{{player_name}}</span>{{p_index==4?'附体':p_index==5?'争夺C位啦！':p_index==1 || p_index==2 || p_index==3?'不相上下了！':p_index==10 || p_index==8?'争夺C位啦！':p_index==9 || p_index==7?'附体':''}}</span>
+
+        </div>
+      </div>
+      <div class="modi-wrapper" v-show="showPity">
+        <div>
+          <span   class="name">{{user_name}}</span>
+        </div>
+        <div>
+           <span>
+            你不走寻常路，再加把劲也能和<span class="player-name">魔笛</span>一样<br>创造奇迹!
+          </span>
+        </div>
       </div>
       <!--<img src="/static/imgs/result/氛围@2x.png" class="line">-->
-      <img src="/static/imgs/result/华为云MLS机器学习平台@2x.png" class="intro">
-      <img src="/static/imgs/result/保存图片@2x.png" class="save" @click="savePic">
-      <img src="/static/imgs/result/不服再战@2x.png" class="btn-l" @click="reStart">
-      <img src="/static/imgs/result/精准预测@2x.png" class="btn-r" @click="go">
+      <img src="/static/imgs/result/hwcnb@2x.png" class="intro">
+      <img src="/static/imgs/result/保存图片@2x.png" class="save" @click="savePic" onclick="return false">
+      <img src="/static/imgs/result/不服再战@2x.png" class="btn-l" @click="reStart" onclick="return false">
+      <img src="/static/imgs/result/xsmf@2x.png" class="btn-r" @click="go" onclick="return false">
       <img :src="player_url" class="player">
       <div v-if="ewmShow" class="ewm-wrap">
         <div>
-          <img src="/static/imgs/result/ewm.png" class="ewm" alt="">
+          <img src="/static/imgs/result/ewmwrapper@2x.png" class="ewm" alt="">
           <img src="/static/imgs/result/close.png" class="close" alt="" @click="ewmShow=false">
+          <img src="/static/imgs/result/1531655909.png" alt="" class="ewmm">
         </div>
+      </div>
+      <div class="share">
+        <img :src="share_img_url" class="share-img">
       </div>
     </div>
     <!--<audio src="/static/video/高清射门.ogg" id="video_bgm" ref="video_bgm" autoplay></audio>-->
@@ -43,6 +52,7 @@
 <script>
   /*1=c罗 2=梅西 3=阿尔扎 4=姆巴佩 5=内马尔 6=遗憾 7=纳瓦斯 8=马塞洛 9=哈尔多松 10=拉莫斯*/
   import {mapState,mapActions} from 'vuex'
+
   export default {
     data(){
       return {
@@ -53,77 +63,102 @@
           {
             id:1,
             name:'C罗',
-            url:'/static/imgs/result/C罗@2x.png'
+            url:'/static/imgs/result/cluo.png'
           },
           {
             id:2,
             name:'梅西',
-            url:'/static/imgs/result/ms3@2x.png'
+            url:'/static/imgs/result/meixi.png'
           },
           {
             id:3,
             name:'阿扎尔',
-            url:'/static/imgs/result/阿扎尔@2x.png'
+            url:'/static/imgs/result/azhaer.png'
           },
           {
             id:4,
             name:'姆巴佩',
-            url:'/static/imgs/result/mbp@2x.png'
+            url:'/static/imgs/result/mubapei.png'
           },
           {
             id:5,
             name:'内马尔',
-            url:'/static/imgs/result/nme@2x.png'
+            url:'/static/imgs/result/neimaer.png'
           },
           {
             id:6,
             name:'遗憾',
-            url:''
+            url:'/static/imgs/result/莫德里奇@2x.png'
           },
           {
             id:7,
             name:'纳瓦斯',
-            url:'/static/imgs/result/nws@2x.png'
+            url:'/static/imgs/result/nawasi.png'
           },
           {
             id:8,
             name:'马塞洛',
-            url:'/static/imgs/result/马塞洛@2x.png'
+            url:'/static/imgs/result/masailuo.png'
           },
           {
             id:9,
             name:'哈尔多松',
-            url:'/static/imgs/result/hrds.png'
+            url:'/static/imgs/result/haerduosong.png'
           },
           {
             id:10,
             name:'拉莫斯',
-            url:'/static/imgs/result/拉莫斯@2x.png'
+            url:'/static/imgs/result/lamosi.png'
           }
         ],
         show_video:false,
         ewmShow: false,
+        showPity:false,
+        share_img_url:'',
+        showDefenceTxt:false,
+        p_index:''
       }
     },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+    },
     methods:{
-       ...mapActions('common',['palyMusic','pauseMusic']),
+      ...mapActions('common',['palyMusic','pauseMusic']),
       init(){
         // this.$refs.video_bgm.play()
         setTimeout(()=>{
           this.show_video=false
         },4652)
+
         let obj=this.$route.query
         let arr=[obj.type,obj.question1,obj.question2,obj.question3]
         let player_index=this.handlerAnswer(arr)
+        this.p_index=player_index
         //根据答案判断是哪位球星
-         if(this.player_index!=6){
+        console.log(player_index)
+
+
+
+
+         if(player_index!=6){
             this.player_url=this.player_url_arr[player_index-1].url
             this.player_name=this.player_url_arr[player_index-1].name
             this.user_name=this.$route.query.user_name
          }else{
           //失败的情况写这里
+           this.player_url=this.player_url_arr[player_index-1].url
+           this.player_name=this.player_url_arr[player_index-1].name
+           this.user_name=this.$route.query.user_name
+           this.showPity=true
          }
-
+        /*给胡工传结果*/
+        this.$http.get('/createImg',{params:{
+              result:player_index,
+              name:this.user_name,
+          }}).then(res=>{
+            console.log(res.data)
+          this.share_img_url=res.data
+        })
       },
       reStart(){
         this.$router.push({name:'Enter'})
@@ -309,14 +344,16 @@
 
       }
     },
-    computed:{
-        ...mapState('common',['show_bg_music']),
-    },
     mounted(){
-      if(this.show_bg_music){
-          this.palyMusic()
-      }
       this.init()
+
+      if(this.show_bg_music){
+        this.palyMusic()
+      } else {
+        this.pauseMusic()
+      }
+
+      document.querySelector('#video_bg2').pause()
 
     }
 
@@ -327,7 +364,8 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background: url('/static/imgs/result/氛围@2x.png') no-repeat center 127px;
+        background: url('/static/imgs/result/氛围@2x.png') no-repeat center 127px, url("/static/imgs/result/背景@2x.png") no-repeat center -520px;
+        background-size: 136%, 400%;
         position: relative;
         .wrapper{
           width: 375px;
@@ -348,6 +386,9 @@
               width: 44px;
               height: 45px;
             }
+            .logo-txt{
+              font-family: 'originFont';
+            }
           }
           .txt-wrapper{
             position: absolute;
@@ -360,6 +401,37 @@
             box-sizing: border-box;
             background: url('/static/imgs/result/文案：C罗@2x.png') no-repeat center;
             background-size:348px 87px;
+            font-size: 16px;
+            .name{
+              color:#BF2626;
+              font-size:24px;
+              font-style: italic;
+
+            }
+            .player-name{
+              color:#BF2626;
+              font-size:24px;
+              font-style: italic;
+              line-height: 10px;
+            }
+            .pity{
+              font-size: 16px;
+              padding-left: 10px;
+              line-height: 18px;
+            }
+          }
+          .modi-wrapper{
+            position: absolute;
+            left:8px;
+            top:72px;
+            width: 348px;
+            height: 117px;
+            padding-left:28px;
+            padding-top: 25px;
+            box-sizing: border-box;
+            background: url('/static/imgs/result/moditext.png') no-repeat center;
+            background-size:348px 117px;
+            font-size: 16px;
             .name{
               color:#BF2626;
               font-size:24px;
@@ -411,11 +483,14 @@
             height: 47px;
           }
           .player{
-            width: 462px;
+            width: 375px;
             position: absolute;
-            top:137px;
-            left:-40px;
+            margin: auto;
+            left:0;
+            right: 0;
+            top:0;
           }
+
         }
         .video{
           width: 100%;
@@ -436,8 +511,24 @@
             bottom: 82px;
             left: 114px;
             .ewm {
-              width: 100%;
-              height: 100%;
+              width: 150px;
+              height: 150px;
+              position: absolute;
+              margin: auto;
+              left:0;
+              right: 0;
+              top:0;
+              bottom: 0;
+            }
+            .ewmm{
+              position: absolute;
+              margin: auto;
+              top:0;
+              left:0;
+              right: 0;
+              bottom: 0;
+              width: 125px;
+              height: 125px;
             }
             .close {
               width: 26px;
@@ -448,6 +539,30 @@
             }
           }
         }
-
+        .share{
+          width: 375px;
+          height: 667px;
+          position: absolute;
+          margin: auto;
+          left:0;
+          right:0;
+          bottom: 70px;
+          opacity: 0;
+          z-index: 10;
+          .share-img{
+            width: 375px;
+            height: 667px;
+          }
+        }
       }
+     /*@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
+      .result .player{
+         width: 375px;
+         position: absolute;
+         margin: auto;
+         left:0;
+         right: 0;
+         bottom:-1000px;
+       }
+      }*/
 </style>

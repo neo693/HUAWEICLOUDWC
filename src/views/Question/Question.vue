@@ -7,7 +7,7 @@
     </template>
     <!--<img src="/static/imgs/球@2x.png" alt="" ref="ball" class="question-ball">-->
     <img src="/static/video/video3.gif" v-show="show_video" class="result-video">
-    <audio src="/static/video/shemen.mp3" id="video_bgm" ref="video_bgm"></audio>
+    <audio src="/static/audio/shemen.mp3" id="video_bgm" ref="video_bgm"></audio>
 
     <!--防守型轨迹-->
     <img src="/static/imgs/guiji/F1.png" alt="" class="F1 FG">
@@ -77,6 +77,10 @@ import {mapState,mapActions} from 'vuex'
             id: `G${i}C`
           })
         })
+        sounds.push({
+          src: 'shemen.mp3',
+          id: 'shemen'
+        })
         createjs.Sound.registerSounds(sounds, assetPath)
       },
       select(answer) {
@@ -86,11 +90,9 @@ import {mapState,mapActions} from 'vuex'
         this.selected = answer
 
         // 播放声音
-        document.getElementById('audio').volume=0.05
         let soundID = `${this.$route.query.type == 1 ? 'G' : 'F'}${this.$route.name.slice(-1)}${this.selected}`
         createjs.Sound.play(soundID).on('complete', () => {
           console.log('配音播放结束')
-          document.getElementById('audio').volume=0.3
           // 进入下一页
           // 如果是问题1或者2就进入下一个问题
           // 首先得播放动画再进入下一页
@@ -104,7 +106,8 @@ import {mapState,mapActions} from 'vuex'
             })
             this.selected = false
           } else {
-            window.bgMusic.pause()
+            // this.$refs.video_bgm.play()
+            createjs.Sound.play('shemen')
 
             this.show_video = true
             // 注册声音
@@ -113,10 +116,9 @@ import {mapState,mapActions} from 'vuex'
             createjs.Sound.on("fileload", () => {
               createjs.Sound.play("resultSound");
             });*/
-            this.$refs.video_bgm.play()
+
 
             setTimeout(() => {
-              window.bgMusic.play()
               this.$router.push({
                 name: 'Result',
                 query: Object.assign({}, JSON.parse(JSON.stringify(this.$route.query)), {
@@ -153,7 +155,7 @@ import {mapState,mapActions} from 'vuex'
             rotate: '0.1turn',
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F3',
@@ -163,7 +165,7 @@ import {mapState,mapActions} from 'vuex'
             rotate: '0.1turn',
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F4',
@@ -172,7 +174,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F5',
@@ -181,7 +183,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             scale: 0.9,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F6',
@@ -191,7 +193,7 @@ import {mapState,mapActions} from 'vuex'
             scale: 1.2,
             rotate: '-0.1turn',
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.F7',
@@ -200,7 +202,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             rotate: '-0.1turn',
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .finished
           .then(() => {
@@ -220,7 +222,7 @@ import {mapState,mapActions} from 'vuex'
             opacity: 0,
             scale: 0.6,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G3',
@@ -228,7 +230,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, 270*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 1000
+            duration: 750
           })
           .add({
             targets: '.G4',
@@ -236,7 +238,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, 200*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G5',
@@ -244,7 +246,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, -50*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G6',
@@ -252,7 +254,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, -150*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .add({
             targets: '.G7',
@@ -260,7 +262,7 @@ import {mapState,mapActions} from 'vuex'
             translateY: [0, -50*this.beishu],
             opacity: 0,
             easing: 'linear',
-            duration: 800
+            duration: 600
           })
           .finished
           .then(() => {
@@ -269,11 +271,11 @@ import {mapState,mapActions} from 'vuex'
       },
 
     },
-    computed:{
-      ...mapState('common',['show_bg_music']),
-    },
     created() {
       this.registerSound()
+    },
+    computed:{
+      ...mapState('common',['show_bg_music']),
     },
     mounted() {
       // 计算网页缩放的基数
@@ -296,9 +298,17 @@ import {mapState,mapActions} from 'vuex'
       //window.bgMusic.volume = 0.2
       //window.bgMusic.play()
 
-     if(this.show_bg_music){
-          this.palyMusic()
-      }
+      /*if(this.show_bg_music){
+        this.palyMusic()
+      }*/
+
+      // 暂停背景音乐
+      document.getElementById('audio').pause()
+      // 播放音量小的替代背景音乐
+      /*if (this.show_bg_music) {
+        this.$refs.video_bg2.play()
+      }*/
+
     },
     watch: {
       '$route'() {
@@ -323,7 +333,9 @@ import {mapState,mapActions} from 'vuex'
     width:100%;
     height: 100%;
     background: url('/static/imgs/line1@2x.png') no-repeat center -58px;
+    background-size: 136%;
     position: relative;
+    overflow: hidden;
   }
   .question-ball {
     position: fixed;
@@ -367,7 +379,7 @@ import {mapState,mapActions} from 'vuex'
     width: 316px;
     height: 122px;
     top: 100px;
-    right: -300px;
+    right: -350px;
   }
   .F6 {
     width: 331px;
@@ -409,7 +421,7 @@ import {mapState,mapActions} from 'vuex'
     width: 317px;
     height: 86px;
     top: 240px;
-    right: -300px;
+    right: -350px;
   }
   .G6 {
     width: 344px;

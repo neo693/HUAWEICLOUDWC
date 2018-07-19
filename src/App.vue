@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <router-view :key="key"/>
-    <img src="/static/imgs/result/音乐@2x.png" class="music-btn" v-if="show_bg_music" @click="pause">
-     <img src="/static/imgs/result/禁止播放态@2x.png" class="music-btn" v-else @click="paly">
+    <img src="/static/imgs/result/音乐@2x.png" class="music-btn" v-if="show_bg_music" @click="pauseMusicAll">
+     <img src="/static/imgs/result/禁止播放态@2x.png" class="music-btn" v-else @click="palyMusicAll">
   </div>
 </template>
 
@@ -12,16 +12,26 @@ export default {
   name: 'App',
   data(){
     return {
-        
+
     }
   },
   methods:{
     ...mapActions('common',['palyMusic','pauseMusic']),
-    pause(){
-      this.pauseMusic()
+    palyMusicAll() {
+      if (this.$route.name.indexOf('Question') == -1) {
+        this.palyMusic()
+      } else {
+        this.$store.commit('common/CHANGE_MUSIC_STATE', true)
+        document.querySelector('#video_bg2').play()
+      }
     },
-    paly(){
-      this.palyMusic
+    pauseMusicAll() {
+      if (this.$route.name.indexOf('Question') == -1) {
+        this.pauseMusic()
+      } else {
+        this.$store.commit('common/CHANGE_MUSIC_STATE', false)
+        document.querySelector('#video_bg2').pause()
+      }
     }
   },
   computed:{
@@ -29,9 +39,6 @@ export default {
     key:function() {
       return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
     }
-  },
-  mounted(){
-    console.log(this.show_bg_music,'ee')
   }
 }
 </script>
@@ -40,9 +47,12 @@ export default {
   @import "./assets/css/normalize.css";
   @font-face {
     font-family: myFont;
-    src: url('/static/FZLTHJW.TTF')
+    src: url('/static/pmzd.ttf')
   }
-
+  @font-face {
+    font-family:originFont;
+    src:url('/static/FZLTHJW.TTF')
+  }
   #app {
     font-family: 'myFont';
     width: 375px;
@@ -55,7 +65,7 @@ export default {
     background-image: url('/static/imgs/底色@2x.png');
     background-position: center -58px;
     background-size: cover;
-    overflow: hidden;
+    overflow: hidden
   }
   #app .music-btn{
     position: fixed;
@@ -63,6 +73,6 @@ export default {
     top:14px;
     width: 33px;
     height: 33px;
-    z-index:9;
+    z-index:99;
   }
 </style>

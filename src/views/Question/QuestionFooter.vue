@@ -1,10 +1,10 @@
 <template>
   <div>
-    <img :src="imgSrcA" alt="" @click="select('A')" class="imgSrcA">
+    <img :src="imgSrcA" alt="" @click="select('A')" class="imgSrcA" onclick="return false">
     <i class="pulse infinite" :class="{animated:!selected}" v-show="loaded&&(!selected||selected!='A')"></i>
-    <img :src="imgSrcB" alt="" @click="select('B')" class="imgSrcB">
+    <img :src="imgSrcB" alt="" @click="select('B')" class="imgSrcB" onclick="return false">
     <i class="pulse infinite" :class="{animated:!selected}" v-show="loaded&&(!selected||selected!='B')"></i>
-    <img :src="imgSrcC" alt="" @click="select('C')" class="imgSrcC">
+    <img :src="imgSrcC" alt="" @click="select('C')" class="imgSrcC" onclick="return false">
     <i class="pulse infinite" :class="{animated:!selected}" v-show="loaded&&(!selected||selected!='C')"></i>
   </div>
 </template>

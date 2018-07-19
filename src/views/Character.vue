@@ -2,7 +2,7 @@
     <div class="choose-character">
        <div class="your-name" >
          <div class="txt-wrapper" :class="{focus:params.user_name}">
-           <input type="text" v-model="params.user_name" class="txt" :class="{hasValue:params.user_name}"  @blur="lostFocus">
+           <input type="text" v-model.trim="params.user_name" class="txt" :class="{hasValue:params.user_name}"  @blur="lostFocus" :maxlength="limit">
          </div>
          <!--<img src="/static/imgs/输入姓名@2x.png" class="no-name" @click="showInput" v-else>-->
        </div>
@@ -22,7 +22,7 @@
          <div class="defence-txt" @click="chooseDefence"></div>
        </div>
        <img src="/static/imgs/toast.png" v-show="show_toast" class="toast">
-      <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext">
+      <img src="/static/imgs/character/enter-btn@2x.png" class="enter-btn" @click="toNext" onclick="return false">
       <img src="/static/video/video1.gif" class="video-attack" v-if="show_defence_video">
       <img src="/static/video/video1.gif" class="video-attack" v-if="show_attack_video">
       <audio src="/static/video/足球准备.mp3" ref="video_bgm" loop></audio>
@@ -50,6 +50,7 @@
              ball:'',
             man:'',
             beishu: 1,
+            limit:3
           }
       },
       methods:{
@@ -104,6 +105,10 @@
         },
         toNext(){
           /*进入下一页*/
+          if (this.show_bg_music && this.params.user_name!=='') {
+            console.log(document.querySelector('#video_bg2'))
+            document.querySelector('#video_bg2').play()
+          }
           if(this.params.type==1 && this.params.user_name!==''){
             document.getElementById('audio').pause()
             this.$refs.video_bgm.play()
@@ -111,7 +116,7 @@
             setTimeout(()=>{
               this.$refs.video_bgm.pause()
               this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:1}})
-            },4000)
+            },5748)
           }else if(this.params.type==2 && this.params.user_name!==''){
             document.getElementById('audio').pause()
             this.$refs.video_bgm.play()
@@ -119,7 +124,7 @@
             setTimeout(()=>{
               this.$refs.video_bgm.pause()
               this.$router.push({name:'Question1',query:{user_name:this.params.user_name,type:2}})
-            },4000)
+            },5748)
           }else{
             this.show_toast=true
             setTimeout(()=>{
@@ -129,7 +134,20 @@
         }
       },
       computed:{
-
+        ...mapState('common',['show_bg_music']),
+      },
+      watch:{
+        params:{
+          handler:function(v){
+            let reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+            if(reg.test(v.user_name)){
+              this.limit=4
+            }else{
+              this.limit=6
+            }
+          },
+          deep:true
+        }
       },
       mounted(){
         // 计算网页缩放的基数
@@ -143,7 +161,8 @@
     .choose-character{
       width: 100%;
       height: 100%;
-      background: url('/static/imgs/character/dir-line@2x.png') no-repeat center 74px;
+      background: url('/static/imgs/character/dir-line@2x.png') no-repeat center 80px;
+      background-size: 146%;
       .your-name{
         width: 375px;
         height: 59px;

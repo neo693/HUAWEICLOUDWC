@@ -8,7 +8,7 @@
     <img src="/static/imgs/enter/gate.png" class="gate" v-show="show_gate">
     <img src="/static/imgs/enter/hit.png" class="hit" v-show="show_hit">
     <img src="/static/imgs/enter/ball22.png" class="ball2" v-show="show_hit">
-    <img src="/static/imgs/开启测试之旅@2x.png" alt="start" class="start animated fadeIn" @click="start" v-show="show_btn">
+    <img src="/static/imgs/开启测试之旅@2x.png" alt="start" class="start animated fadeIn" @click="start" v-show="show_btn" onclick="return false">
     <img :src="music_url" alt="music" class="music animated fadeIn" v-show="show_btn" @click="switchMusic">
   </div>
 </template>
@@ -21,7 +21,6 @@ import {mapState,mapActions} from 'vuex'
         show_head_ball:true,
         show_gate:true,
         show_hit:true,
-        music_url:'/static/imgs/打开声音@2x.png',
         time_dur:1500,
         time_delay:600,
         ball1:'',
@@ -30,6 +29,17 @@ import {mapState,mapActions} from 'vuex'
         timer1:'',
         timer2:'',
         timer3:'',
+        beishu: 1,
+      }
+    },
+    computed:{
+      ...mapState('common',['show_bg_music']),
+      music_url() {
+        if (!this.show_bg_music) {
+          return '/static/imgs/enter/框@2x.png'
+        } else {
+          return '/static/imgs/打开声音@2x.png'
+        }
       }
     },
     methods:{
@@ -44,22 +54,22 @@ import {mapState,mapActions} from 'vuex'
         manTimeline
           .add({
             targets: '.man2',
-            translateX:[0,-400, -400],
-            translateY: [0,-230, -230],
+            translateX:[0,-400*this.beishu, -400*this.beishu],
+            translateY: [0,-630*this.beishu, -630*this.beishu],
             duration: this.time_dur,
             easing: 'linear'
           })
           .add({
             targets: '.gate',
-            translateX:[0,375,375],
-            translateY:[0,60,60],
+            translateX:[0,375*this.beishu,375*this.beishu],
+            translateY:[0,60*this.beishu,60*this.beishu],
             duration: this.time_dur,
             easing: 'linear'
           })
           .add({
             targets: '.hit',
-            translateX:[0,-360,-360],
-            translateY: [0,-400,-400],
+            translateX:[0,-360*this.beishu,-360*this.beishu],
+            translateY: [0,-750*this.beishu,-750*this.beishu],
             duration: this.time_dur,
             easing: 'linear'
           })
@@ -70,16 +80,16 @@ import {mapState,mapActions} from 'vuex'
         ballTimeline
           .add({
             targets: '.ball1',
-            translateX:[0,130,130],
-            translateY: [0,-100,-100],
+            translateX:[0,130*this.beishu,130*this.beishu],
+            translateY: [0,-100*this.beishu,-100*this.beishu],
             duration: this.time_dur,
             rotate:'3turn',
             easing: 'linear'
           })
           .add({
             targets: '.ball2',
-            translateX:[0,-350,-350],
-            translateY: [0,100,100],
+            translateX:[0,-350*this.beishu,-350*this.beishu],
+            translateY: [0,100*this.beishu,100*this.beishu],
             duration: this.time_dur,
             rotate:'3turn',
             easing: 'linear',
@@ -116,26 +126,25 @@ import {mapState,mapActions} from 'vuex'
       },
       switchMusic(){
         if(this.music_url=='/static/imgs/打开声音@2x.png'){
-          this.music_url='/static/imgs/enter/框@2x.png'
-          document.getElementById('audio').pause()
+          this.pauseMusic()
         }else if(this.music_url=='/static/imgs/enter/框@2x.png'){
-          this.music_url='/static/imgs/打开声音@2x.png'
-          document.getElementById('audio').play()
+          this.palyMusic()
         }
       },
     },
-    computed:{
-      ...mapState('common',['show_bg_music']),
-    },
     mounted(){
-      if(this.show_bg_music){
-          this.palyMusic()
-      }
+      this.palyMusic()
+      // 计算网页缩放的基数
+      this.beishu = parseInt(document.documentElement.style.fontSize)/37.5;
       this.animate()
 
       setTimeout(() => {
         this.show_btn = true
       }, 3*this.time_dur)
+
+      if(this.show_bg_music){
+        this.palyMusic()
+      }
     }
   }
 </script>
@@ -143,8 +152,9 @@ import {mapState,mapActions} from 'vuex'
   .enter{
     width:100%;
     height: 100%;
-    background: url('/static/imgs/line2@2x.png') no-repeat center 154px;
+    background: url('/static/imgs/line2@2x.png') no-repeat center 130px;
     position: relative;
+    background-size: 145%;
     overflow: hidden;
     .title{
       display: block;
@@ -191,7 +201,7 @@ import {mapState,mapActions} from 'vuex'
       display: block;
       width: 375px;
       right:-400px;
-      bottom: -200px;
+      top: 600px;
       margin: auto;
     }
     .ball1{
@@ -214,7 +224,7 @@ import {mapState,mapActions} from 'vuex'
       display: block;
       width: 375px;
       right:-325px;
-      bottom: -452px;
+      top: 800px;
       margin: auto;
     }
     .ball2{
